@@ -1,0 +1,179 @@
+:root {
+    --primary: #001737;
+    --secondary: #0060ab;
+    --surface: #faf9fd;
+    --on-surface: #1a1b1f;
+}
+
+.dark {
+    --primary: #abc7ff;
+    --secondary: #61a9ff;
+    --surface: #1a1b1f;
+    --on-surface: #e3e2e7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background-color: var(--surface);
+    color: var(--on-surface);
+    margin: 0;
+    padding: 0;
+}
+
+.blueprint-bg {
+    background-color: var(--surface);
+    background-image:
+        linear-gradient(rgba(226, 240, 255, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(226, 240, 255, 0.5) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.dark .blueprint-bg {
+    background-image:
+        linear-gradient(rgba(100, 120, 160, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 120, 160, 0.1) 1px, transparent 1px);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(226, 240, 255, 0.8);
+}
+
+.dark .glass-card {
+    background: rgba(26, 27, 31, 0.6);
+    border-color: rgba(100, 120, 160, 0.2);
+}
+
+.gradient-mesh {
+    background: radial-gradient(circle at 0% 0%, rgba(211, 227, 255, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(141, 215, 247, 0.2) 0%, transparent 50%);
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.page-enter {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.slide-up-enter {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+/* Seat styles */
+.seat {
+    width: 44px; height: 44px; border-radius: 8px 8px 4px 4px;
+    cursor: pointer; transition: all 0.15s ease; border: 2px solid transparent;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; font-family: 'Manrope', sans-serif;
+}
+.seat-available { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+.seat-available:hover { background: #3b82f6; color: white; transform: scale(1.12); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+.seat-booked { background: #fee2e2; color: #991b1b; border-color: #fca5a5; cursor: not-allowed; opacity: 0.75; }
+.seat-selected { background: #042b5b; color: #a3c9ff; border-color: #0060ab; transform: scale(1.12); box-shadow: 0 4px 16px rgba(4,43,91,0.45); }
+
+/* Toggle switch */
+.toggle-checkbox:checked + .toggle-label { background-color: #001737; }
+.toggle-checkbox:checked + .toggle-label .toggle-dot { transform: translateX(100%); }
+
+/* Custom radio */
+.custom-radio { appearance: none; width: 20px; height: 20px; border: 1px solid rgba(93,104,117,0.2); border-radius: 50%; outline: none; transition: all 0.15s; position: relative; }
+.custom-radio:checked { border-color: #042b5b; }
+.custom-radio:checked::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: #042b5b; }
+
+/* Status badges */
+.status-upcoming { background: #8DD7F7; color: #001737; }
+.status-completed { background: #d1fae5; color: #065f46; }
+.status-cancelled { background: #fee2e2; color: #991b1b; }
+
+/* Animations */
+@keyframes pulse-subtle { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+.animate-pulse-subtle { animation: pulse-subtle 3s ease-in-out infinite; }
+
+/* Chat widget */
+#chat-widget {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+}
+#chat-toggle {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #001737; color: white; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,23,55,0.3); transition: all 0.3s;
+    font-size: 28px;
+}
+#chat-toggle:hover { transform: scale(1.1); background: #042b5b; }
+#chat-panel {
+    display: none; position: absolute; bottom: 80px; right: 0;
+    width: 380px; height: 500px; background: white; border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15); flex-direction: column; overflow: hidden;
+}
+#chat-panel.open { display: flex; }
+#chat-header {
+    background: #001737; color: white; padding: 16px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+#chat-messages {
+    flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px;
+}
+.chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+.chat-user { align-self: flex-end; background: #001737; color: white; border-bottom-right-radius: 4px; }
+.chat-ai { align-self: flex-start; background: #f0f4f8; color: #1a1b1f; border-bottom-left-radius: 4px; }
+#chat-input-area {
+    padding: 12px 16px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px;
+}
+#chat-input {
+    flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px;
+    font-size: 14px; outline: none; font-family: 'Manrope', sans-serif;
+}
+#chat-input:focus { border-color: #0060ab; }
+#chat-send {
+    padding: 10px 16px; background: #001737; color: white; border: none;
+    border-radius: 8px; cursor: pointer; font-family: 'Manrope', sans-serif; font-weight: 600;
+}
+#chat-send:hover { background: #042b5b; }
+
+/* Glass panel (used in payment, tracking templates) */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid #E2F0FF;
+}
+.dark .glass-panel {
+    background: rgba(26, 27, 31, 0.6);
+    border-color: rgba(100, 120, 160, 0.2);
+}
+
+/* Booking card (used in schedules) */
+.booking-card {
+    background: #ffffff;
+    border: 1px solid rgba(4, 43, 91, 0.15);
+    box-shadow: inset 0 0 0 4px #faf9fd, 0 10px 40px -10px rgba(0, 23, 55, 0.08);
+}
+.dark .booking-card {
+    background: rgba(26, 27, 31, 0.8);
+}
+
+/* Background grid */
+.bg-grid {
+    background-image:
+        linear-gradient(rgba(171, 199, 255, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(171, 199, 255, 0.4) 1px, transparent 1px);
+    background-size: 80px 80px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #chat-panel { width: calc(100vw - 32px); right: -16px; height: 70vh; }
+}

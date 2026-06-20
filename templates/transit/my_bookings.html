@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}My Bookings | TRAJET{% endblock %}
+{% block content %}
+<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+    <section class="mb-16">
+        <h1 class="font-display-hero text-display-hero-mobile md:text-display-hero mb-4">My Bookings</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Manage your journeys across the high-speed network. Access digital boarding passes and track real-time transit status.</p>
+    </section>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <aside class="md:col-span-3 space-y-8">
+            <div class="glass-card p-6 rounded-lg">
+                <h3 class="font-label-caps text-label-caps text-outline mb-6">Filter by Status</h3>
+                <ul class="space-y-4">
+                    <li><button class="flex items-center justify-between w-full text-left group"><span class="font-headline-md text-[18px] text-primary group-hover:text-secondary transition-colors">All Trips</span><span class="text-label-caps font-mono bg-surface-container px-2 py-1 rounded">{{ total_count }}</span></button></li>
+                    <li><button class="flex items-center justify-between w-full text-left group"><span class="font-headline-md text-[18px] text-on-surface-variant group-hover:text-secondary transition-colors">Upcoming</span><span class="text-label-caps font-mono bg-soft-cyan/30 text-primary px-2 py-1 rounded">{{ upcoming_count }}</span></button></li>
+                    <li><button class="flex items-center justify-between w-full text-left group"><span class="font-headline-md text-[18px] text-on-surface-variant group-hover:text-secondary transition-colors">Completed</span><span class="text-label-caps font-mono bg-surface-container px-2 py-1 rounded">{{ completed_count }}</span></button></li>
+                    <li><button class="flex items-center justify-between w-full text-left group"><span class="font-headline-md text-[18px] text-on-surface-variant group-hover:text-secondary transition-colors">Cancelled</span><span class="text-label-caps font-mono bg-error-container text-error px-2 py-1 rounded">{{ cancelled_count }}</span></button></li>
+                </ul>
+            </div>
+        </aside>
+        <div class="md:col-span-9 space-y-6">
+            <div class="mb-12">
+                <h2 class="font-headline-md text-headline-md mb-8 flex items-center gap-3">Upcoming <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span></h2>
+                <div class="space-y-4">
+                    {% for trip in upcoming_trips %}
+                    <div class="glass-card p-6 md:p-8 rounded-lg group hover:border-secondary transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="status-upcoming px-3 py-1 text-label-caps font-label-caps rounded-lg">{{ trip.status }}</span>
+                                    <span class="font-label-caps text-label-caps text-outline">Ref: {{ trip.reference }}</span>
+                                </div>
+                                <h3 class="font-headline-md text-[28px] md:text-[32px] mb-2">{{ trip.schedule.route.departure.city }} &ndash; {{ trip.schedule.route.destination.city }}</h3>
+                                <div class="flex flex-wrap gap-x-8 gap-y-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-secondary text-sm">calendar_today</span>
+                                        <span class="font-mono text-body-md font-semibold">{{ trip.schedule.departure_time|date:"d M Y" }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-secondary text-sm">schedule</span>
+                                        <span class="font-mono text-body-md font-semibold">{{ trip.schedule.departure_time|time:"H:i" }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-secondary text-sm">airline_seat_recline_normal</span>
+                                        <span class="font-mono text-body-md font-semibold">{{ trip.seat_number }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-8 w-full md:w-auto pt-6 md:pt-0 border-t md:border-t-0 border-outline-variant/20">
+                                <div class="flex flex-col gap-2 ml-auto md:ml-0">
+                                    <a href="{% url 'transit:live_tracking' %}" class="inline-block bg-primary text-white px-6 py-2 font-label-caps text-label-caps rounded-lg hover:bg-secondary transition-colors text-center">Track Bus</a>
+                                    <form method="POST" action="{% url 'transit:cancel_booking' trip.reference %}" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="w-full inline-block bg-red-50 text-red-600 border border-red-200 px-6 py-2 font-label-caps text-label-caps rounded-lg hover:bg-red-100 transition-colors text-center">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="p-8 text-center border-2 border-dashed border-outline-variant/30 rounded-lg">
+                        <span class="material-symbols-outlined text-outline text-4xl mb-4">confirmation_number</span>
+                        <p class="text-on-surface-variant font-body-md mb-4">You have no upcoming journeys planned.</p>
+                        <a href="{% url 'transit:schedules' %}" class="inline-block bg-secondary text-white px-6 py-2 rounded font-label-caps text-label-caps">Book a Ticket</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                <h2 class="font-headline-md text-headline-md mb-8 text-on-surface-variant">Past Journeys</h2>
+                <div class="space-y-4">
+                    {% for trip in past_trips %}
+                    <div class="border border-outline-variant/10 bg-surface-container-low p-6 rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-6 opacity-80 hover:opacity-100 transition-all">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                {% if trip.status == 'completed' %}
+                                <span class="status-completed px-3 py-1 text-label-caps font-label-caps rounded-lg">Completed</span>
+                                {% elif trip.status == 'cancelled' %}
+                                <span class="status-cancelled px-3 py-1 text-label-caps font-label-caps rounded-lg">Cancelled</span>
+                                {% endif %}
+                                <span class="font-label-caps text-label-caps text-outline">Ref: {{ trip.reference }}</span>
+                            </div>
+                            <h3 class="font-headline-md text-[20px]">{{ trip.schedule.route.departure.city }} &ndash; {{ trip.schedule.route.destination.city }}</h3>
+                            <p class="text-body-md text-on-surface-variant font-mono">{{ trip.schedule.departure_time|date:"d M Y" }} &bull; {{ trip.schedule.departure_time|time:"H:i" }} &bull; Seat {{ trip.seat_number }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="p-8 text-center border-2 border-dashed border-outline-variant/30 rounded-lg">
+                        <span class="material-symbols-outlined text-outline text-4xl mb-4">history</span>
+                        <p class="text-on-surface-variant font-body-md">No past journeys yet.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

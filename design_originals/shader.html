@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title> TRAJET Transit System</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Manrope:wght@400;600&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <script id="tailwind-config">
+                tailwind.config = {
+                        darkMode: "class",
+                        theme: {
+                                extend: {
+                                        "colors": {
+                                                "outline-variant": "#c4c6d0",
+                                                "on-secondary-fixed-variant": "#004882",
+                                                "error": "#ba1a1a",
+                                                "secondary-fixed-dim": "#a3c9ff",
+                                                "on-error": "#ffffff",
+                                                "outline": "#747780",
+                                                "on-primary-fixed-variant": "#284678",
+                                                "primary": "#001737",
+                                                "on-tertiary-fixed": "#001f29",
+                                                "surface-container-lowest": "#ffffff",
+                                                "on-tertiary-fixed-variant": "#004d63",
+                                                "secondary-container": "#61a9ff",
+                                                "on-secondary": "#ffffff",
+                                                "primary-fixed-dim": "#abc7ff",
+                                                "primary-container": "#042b5b",
+                                                "on-secondary-fixed": "#001c39",
+                                                "tertiary-container": "#00303f",
+                                                "surface-container-high": "#e9e7ec",
+                                                "on-background": "#1a1b1f",
+                                                "on-surface": "#1a1b1f",
+                                                "tertiary-fixed": "#bce9ff",
+                                                "surface-tint": "#415e91",
+                                                "tertiary": "#001a24",
+                                                "error-container": "#ffdad6",
+                                                "on-primary-fixed": "#001b3f",
+                                                "inverse-primary": "#abc7ff",
+                                                "tertiary-fixed-dim": "#86d0f0",
+                                                "secondary-fixed": "#d3e3ff",
+                                                "on-tertiary-container": "#509cba",
+                                                "surface-variant": "#e3e2e7",
+                                                "on-surface-variant": "#43474f",
+                                                "surface-container-highest": "#e3e2e7",
+                                                "on-error-container": "#93000a",
+                                                "surface-dim": "#dad9de",
+                                                "surface-container": "#eeedf2",
+                                                "secondary": "#0060ab",
+                                                "surface-bright": "#faf9fd",
+                                                "on-primary-container": "#7794ca",
+                                                "on-secondary-container": "#003c6f",
+                                                "on-primary": "#ffffff",
+                                                "surface": "#faf9fd",
+                                                "on-tertiary": "#ffffff",
+                                                "inverse-surface": "#2f3034",
+                                                "primary-fixed": "#d7e3ff",
+                                                "surface-container-low": "#f4f3f8",
+                                                "background": "#faf9fd",
+                                                "inverse-on-surface": "#f1f0f5"
+                                        },
+                                        "borderRadius": {
+                                                "DEFAULT": "0.125rem",
+                                                "lg": "0.25rem",
+                                                "xl": "0.5rem",
+                                                "full": "0.75rem"
+                                        },
+                                        "spacing": {
+                                                "unit": "4px",
+                                                "margin-mobile": "20px",
+                                                "margin-desktop": "64px",
+                                                "container-max": "1440px",
+                                                "gutter": "24px"
+                                        },
+                                        "fontFamily": {
+                                                "headline-md": [
+                                                        "Inter"
+                                                ],
+                                                "headline-lg": [
+                                                        "Inter"
+                                                ],
+                                                "display-hero": [
+                                                        "Inter"
+                                                ],
+                                                "body-md": [
+                                                        "Manrope"
+                                                ],
+                                                "display-hero-mobile": [
+                                                        "Inter"
+                                                ],
+                                                "body-lg": [
+                                                        "Manrope"
+                                                ],
+                                                "label-caps": [
+                                                        "Manrope"
+                                                ]
+                                        },
+                                        "fontSize": {
+                                                "headline-md": [
+                                                        "24px",
+                                                        {
+                                                                "lineHeight": "1.2",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "headline-lg": [
+                                                        "40px",
+                                                        {
+                                                                "lineHeight": "1.1",
+                                                                "letterSpacing": "-0.01em",
+                                                                "fontWeight": "700"
+                                                        }
+                                                ],
+                                                "display-hero": [
+                                                        "90px",
+                                                        {
+                                                                "lineHeight": "0.9",
+                                                                "letterSpacing": "-0.04em",
+                                                                "fontWeight": "800"
+                                                        }
+                                                ],
+                                                "body-md": [
+                                                        "16px",
+                                                        {
+                                                                "lineHeight": "1.5",
+                                                                "letterSpacing": "0.01em",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "display-hero-mobile": [
+                                                        "48px",
+                                                        {
+                                                                "lineHeight": "1.0",
+                                                                "letterSpacing": "-0.02em",
+                                                                "fontWeight": "800"
+                                                        }
+                                                ],
+                                                "body-lg": [
+                                                        "18px",
+                                                        {
+                                                                "lineHeight": "1.6",
+                                                                "letterSpacing": "0.01em",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "label-caps": [
+                                                        "12px",
+                                                        {
+                                                                "lineHeight": "1.0",
+                                                                "letterSpacing": "0.08em",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ]
+                                        }
+                                },
+                        },
+                }
+        </script>
+        <style>
+                .page-enter {
+                        opacity: 0;
+                        animation: fadeIn 0.8s ease-out forwards;
+                }
+
+                .slide-up-enter {
+                        opacity: 0;
+                        transform: translateY(30px);
+                        animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                }
+
+                .slide-in-right-enter {
+                        opacity: 0;
+                        transform: translateX(40px);
+                        animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                }
+
+                .delay-100 {
+                        animation-delay: 100ms;
+                }
+
+                .delay-200 {
+                        animation-delay: 200ms;
+                }
+
+                .delay-300 {
+                        animation-delay: 300ms;
+                }
+
+                .delay-400 {
+                        animation-delay: 400ms;
+                }
+
+                @keyframes fadeIn {
+                        to {
+                                opacity: 1;
+                        }
+                }
+
+                @keyframes slideUp {
+                        to {
+                                opacity: 1;
+                                transform: translateY(0);
+                        }
+                }
+
+                @keyframes slideInRight {
+                        to {
+                                opacity: 1;
+                                transform: translateX(0);
+                        }
+                }
+
+                .glass-card {
+                        background: rgba(255, 255, 255, 0.95);
+                        border: 1px solid rgba(4, 43, 91, 0.15);
+                        box-shadow: inset 0 0 0 4px #faf9fd;
+                }
+
+                .booking-card {
+                        background: #ffffff;
+                        border: 1px solid rgba(4, 43, 91, 0.15);
+                        box-shadow: inset 0 0 0 4px #faf9fd, 0 10px 40px -10px rgba(0, 23, 55, 0.08);
+                }
+
+                .nav-link-underline {
+                        position: relative;
+                }
+
+                .nav-link-underline::after {
+                        content: '';
+                        position: absolute;
+                        width: 0;
+                        height: 2px;
+                        bottom: -4px;
+                        left: 0;
+                        background-color: currentColor;
+                        transition: width 0.3s ease;
+                }
+
+                .nav-link-underline:hover::after {
+                        width: 100%;
+                }
+
+                /* Parallax effect variables */
+                :root {
+                        --mouse-x: 0deg;
+                        --mouse-y: 0deg;
+                }
+
+                .parallax-element {
+                        transform: perspective(1000px) rotateX(var(--mouse-y)) rotateY(var(--mouse-x));
+                        transition: transform 0.1s ease-out;
+                }
+
+                .bg-grid {
+                        background-image:
+                                linear-gradient(rgba(171, 199, 255, 0.4) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(171, 199, 255, 0.4) 1px, transparent 1px);
+                        background-size: 80px 80px;
+                }
+        </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md text-body-md overflow-x-hidden page-enter"
+        style="background: linear-gradient(135deg, #FFFFFF 0%, #E2F0FF 100%);">
+        <!-- Fixed Shader Background -->
+        <div class="fixed inset-0 z-[-1] pointer-events-none bg-grid">
+        </div>
+        <!-- TopNavBar -->
+        <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-primary/80 backdrop-blur-xl border-b border-primary/10">
+                <div
+                        class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+                        <div
+                                class="font-headline-md text-headline-md font-bold tracking-[0.1em] text-secondary uppercase">
+                                TRAJET
+                        </div>
+                        <div class="hidden md:flex space-x-12">
+                                <a class="text-primary-container font-label-caps text-label-caps hover:text-secondary transition-colors duration-150 border-b-2 border-primary-container pb-1"
+                                        href="{% url 'transit:schedules' %}">Schedules</a>
+                                <a class="text-outline hover:text-secondary transition-colors duration-150 font-label-caps text-label-caps"
+                                        href="{% url 'transit:my_bookings' %}">My Bookings</a>
+                                <a class="text-outline hover:text-secondary transition-colors duration-150 font-label-caps text-label-caps"
+                                        href="{% url 'transit:wallet' %}">Wallet</a>
+                                <a class="text-outline hover:text-secondary transition-colors duration-150 font-label-caps text-label-caps"
+                                        href="{% url 'transit:alerts' %}">Alerts</a>
+                        </div>
+                        <div class="flex items-center space-x-6">
+                                <button
+                                        class="text-outline hover:text-secondary transition-colors duration-150 flex items-center">
+                                        <span class="material-symbols-outlined"
+                                                style="font-variation-settings: 'FILL' 0;">notifications</span>
+                                </button>
+
+                                {% if user.is_authenticated %}
+                                <!-- Profile dropdown when logged in -->
+                                <div class="relative" id="profile-menu-wrapper">
+                                        <button id="profile-btn" onclick="toggleProfileMenu()"
+                                                class="flex items-center gap-2 font-label-caps text-label-caps text-primary-container hover:text-secondary transition-colors duration-150 uppercase tracking-[0.08em] font-semibold border border-primary-container px-4 py-2">
+                                                <span
+                                                        class="w-6 h-6 rounded-full bg-primary-container text-white text-[11px] flex items-center justify-center font-bold">
+                                                        {{ user.username|first|upper }}
+                                                </span>
+                                                {{ user.username|truncatechars:10 }}
+                                                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                                        </button>
+                                        <div id="profile-dropdown"
+                                                class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-primary/10 shadow-xl rounded-sm z-50">
+                                                <a href="{% url 'transit:account_settings' %}"
+                                                        class="flex items-center gap-2 px-4 py-3 text-sm text-primary-container hover:bg-secondary-fixed/30 transition-colors font-semibold">
+                                                        <span
+                                                                class="material-symbols-outlined text-[18px]">manage_accounts</span>
+                                                        Settings
+                                                </a>
+                                                <a href="{% url 'transit:my_bookings' %}"
+                                                        class="flex items-center gap-2 px-4 py-3 text-sm text-primary-container hover:bg-secondary-fixed/30 transition-colors font-semibold">
+                                                        <span
+                                                                class="material-symbols-outlined text-[18px]">confirmation_number</span>
+                                                        My Bookings
+                                                </a>
+                                                <div class="border-t border-primary/10"></div>
+                                                <a href="{% url 'transit:logout_user' %}"
+                                                        class="flex items-center gap-2 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors font-semibold">
+                                                        <span
+                                                                class="material-symbols-outlined text-[18px]">logout</span>
+                                                        Log Out
+                                                </a>
+                                        </div>
+                                </div>
+                                {% else %}
+                                <!-- Login button when not logged in -->
+                                <a href="{% url 'transit:login_user' %}"
+                                        class="font-label-caps text-label-caps text-primary-container hover:text-secondary transition-colors duration-150 uppercase tracking-[0.08em] font-semibold border border-primary-container px-6 py-2">
+                                        Login
+                                </a>
+                                {% endif %}
+                        </div>
+                </div>
+        </nav>
+        <!-- Main Content -->
+        <main
+                class="pt-[140px] pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto min-h-screen flex items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter w-full">
+                        <!-- Left Content (60%) -->
+                        <div class="col-span-1 lg:col-span-7 flex flex-col justify-center space-y-12 lg:pr-12">
+                                <div class="space-y-6">
+                                        <div
+                                                class="inline-block px-4 py-2 border border-secondary text-secondary font-label-caps text-[11px] bg-white/50 rounded-sm uppercase tracking-[0.15em] slide-up-enter">
+                                                OFFICIAL TRANSIT PARTNER
+                                        </div>
+                                        <h1
+                                                class="font-display-hero text-display-hero-mobile md:text-[100px] text-primary-container slide-up-enter delay-100 font-bold leading-none tracking-tight">
+                                                SEAMLESS<br />TRAVEL.
+                                        </h1>
+                                        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl slide-up-enter delay-200"
+                                                style="font-size: 18px; line-height: 1.6;">
+                                                Book an open route pass, skip the rigid schedules, and hop on any bus
+                                                heading your way. Real-time tracking included.
+                                        </p>
+                                </div>
+                                <!-- Stats -->
+                                <div class="flex items-center space-x-12 slide-up-enter delay-300 pt-4">
+                                        <div class="flex items-center space-x-8 border-r border-primary/10 pr-8">
+                                                <div>
+                                                        <div
+                                                                class="font-headline-lg text-[40px] text-secondary font-bold">
+                                                                5M+</div>
+                                                        <div
+                                                                class="font-label-caps text-[11px] text-outline mt-1 tracking-widest uppercase">
+                                                                RIDERS</div>
+                                                </div>
+                                        </div>
+                                        <div>
+                                                <div class="font-headline-lg text-[40px] text-secondary font-bold">10K+
+                                                </div>
+                                                <div
+                                                        class="font-label-caps text-[11px] text-outline mt-1 tracking-widest uppercase">
+                                                        DAILY TRIPS</div>
+                                        </div>
+                                </div>
+                                <!-- Recent Trips Glass Card -->
+                                <div
+                                        class="glass-card p-6 mt-8 w-full max-w-xl parallax-element slide-up-enter delay-400 shadow-lg">
+                                        <h3
+                                                class="font-label-caps text-label-caps text-primary-container mb-6 tracking-[0.08em] font-semibold uppercase">
+                                                RECENT TRIPS</h3>
+                                        <ul class="space-y-4">
+                                                <li
+                                                        class="flex justify-between items-center bg-primary-container p-4 rounded-sm text-white group">
+                                                        <div class="flex items-center space-x-4">
+                                                                <div
+                                                                        class="w-4 h-4 rounded-full bg-secondary-fixed border-2 border-primary-container flex items-center justify-center flex-shrink-0">
+                                                                        <div class="w-1.5 h-1.5 bg-white rounded-full">
+                                                                        </div>
+                                                                </div>
+                                                                <span class="font-body-md text-body-md font-medium">Mumbai
+                                                                        - Pune</span>
+                                                        </div>
+                                                        <div class="flex items-center space-x-6">
+                                                                <span class="material-symbols-outlined text-[20px]"
+                                                                        style="font-variation-settings: 'FILL' 0;">directions_bus</span>
+                                                                <button
+                                                                        class="bg-secondary-fixed text-primary-container px-4 py-1.5 rounded-sm font-label-caps text-[11px] hover:bg-white transition-colors uppercase tracking-wider font-semibold min-w-[100px] text-center">Check
+                                                                        Buses</button>
+                                                        </div>
+                                                </li>
+                                                <li
+                                                        class="flex justify-between items-center bg-secondary-fixed/50 p-4 rounded-sm group">
+                                                        <div class="flex items-center space-x-4">
+                                                                <div
+                                                                        class="w-4 h-4 rounded-full bg-success/20 border-2 border-white flex items-center justify-center flex-shrink-0">
+                                                                        <div
+                                                                                class="w-1.5 h-1.5 bg-green-500 rounded-full">
+                                                                        </div>
+                                                                </div>
+                                                                <span
+                                                                        class="font-body-md text-body-md text-primary-container font-medium">Nashik
+                                                                        - Pune</span>
+                                                        </div>
+                                                        <div class="flex items-center space-x-6 text-outline">
+                                                                <span class="material-symbols-outlined text-[20px]"
+                                                                        style="font-variation-settings: 'FILL' 0;">directions_bus</span>
+                                                                <span
+                                                                        class="font-body-md text-body-md font-medium text-outline w-[100px] text-right">05/06/2026</span>
+                                                        </div>
+                                                </li>
+                                                <li
+                                                        class="flex justify-between items-center bg-secondary-fixed/50 p-4 rounded-sm group">
+                                                        <div class="flex items-center space-x-4">
+                                                                <div
+                                                                        class="w-4 h-4 rounded-full bg-success/20 border-2 border-white flex items-center justify-center flex-shrink-0">
+                                                                        <div
+                                                                                class="w-1.5 h-1.5 bg-green-500 rounded-full">
+                                                                        </div>
+                                                                </div>
+                                                                <span
+                                                                        class="font-body-md text-body-md text-primary-container font-medium">Nagpur
+                                                                        - Pune</span>
+                                                        </div>
+                                                        <div class="flex items-center space-x-6 text-outline">
+                                                                <span class="material-symbols-outlined text-[20px]"
+                                                                        style="font-variation-settings: 'FILL' 0;">directions_bus</span>
+                                                                <span
+                                                                        class="font-body-md text-body-md font-medium text-outline w-[100px] text-right">10/05/2026</span>
+                                                        </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                        </div>
+                        <!-- Right Panel (40%) -->
+                        <div class="col-span-1 lg:col-span-5 relative mt-16 lg:mt-0 flex items-center justify-end">
+                                <div
+                                        class="booking-card p-10 w-full max-w-md parallax-element slide-in-right-enter delay-200 shadow-lg">
+                                        <div class="mb-8">
+                                                <h2
+                                                        class="font-headline-md text-headline-md text-primary-container mb-2 font-bold tracking-wide">
+                                                        WHERE TO?</h2>
+                                                <p class="font-body-md text-body-md text-outline text-sm">PURCHASE YOUR
+                                                        ROUTE PASS.</p>
+                                        </div>
+                                        <form class="space-y-6" method="POST" action="">
+                                                {% csrf_token %}
+                                                <!-- Departure + Swap + Destination stacked -->
+                                                <div class="flex flex-col" id="swap-container">
+
+                                                        <!-- DEPARTURE -->
+                                                        <div class="space-y-2" id="dep-col">
+                                                                <label
+                                                                        class="font-label-caps text-[10px] text-primary-container uppercase tracking-widest">DEPARTURE</label>
+                                                                <div class="relative" id="dep-wrapper">
+                                                                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary text-[20px]"
+                                                                                style="font-variation-settings: 'FILL' 0;">my_location</span>
+                                                                        <input id="dep-input" name="departure"
+                                                                                autocomplete="off"
+                                                                                class="w-full h-12 pl-12 pr-4 bg-secondary-fixed/20 border border-secondary-fixed rounded-sm focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-body-md text-body-md text-primary-container placeholder:text-outline"
+                                                                                placeholder="City or Station"
+                                                                                type="text" />
+                                                                        <ul id="dep-list"
+                                                                                class="absolute z-50 w-full bg-white border border-secondary-fixed rounded-sm shadow-xl max-h-48 overflow-y-auto hidden"
+                                                                                style="top:100%; margin-top:4px;"></ul>
+                                                                </div>
+                                                        </div>
+
+                                                        <!-- SWAP BUTTON — centred row, -my pulls fields closer together -->
+                                                        <div class="flex justify-center items-center"
+                                                                style="margin: 6px 0;">
+                                                                <button type="button" id="swap-btn"
+                                                                        class="w-10 h-10 bg-white text-secondary rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all shadow-md border border-outline-variant/30 cursor-pointer z-10"
+                                                                        title="Swap Locations">
+                                                                        <span class="material-symbols-outlined text-[20px]"
+                                                                                style="font-variation-settings: 'FILL' 0;">swap_vert</span>
+                                                                </button>
+                                                        </div>
+
+                                                        <!-- DESTINATION -->
+                                                        <div class="space-y-2" id="dest-col">
+                                                                <label
+                                                                        class="font-label-caps text-[10px] text-primary-container uppercase tracking-widest">DESTINATION</label>
+                                                                <div class="relative" id="dest-wrapper">
+                                                                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary text-[20px]"
+                                                                                style="font-variation-settings: 'FILL' 0;">location_on</span>
+                                                                        <input id="dest-input" name="destination"
+                                                                                autocomplete="off"
+                                                                                class="w-full h-12 pl-12 pr-4 bg-secondary-fixed/20 border border-secondary-fixed rounded-sm focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-body-md text-body-md text-primary-container placeholder:text-outline"
+                                                                                placeholder="City or Station"
+                                                                                type="text" />
+                                                                        <ul id="dest-list"
+                                                                                class="absolute z-50 w-full bg-white border border-secondary-fixed rounded-sm shadow-xl max-h-48 overflow-y-auto hidden"
+                                                                                style="top:100%; margin-top:4px;"></ul>
+                                                                </div>
+                                                        </div>
+
+                                                </div>
+
+
+                                                <div class="space-y-2">
+                                                        <label
+                                                                class="font-label-caps text-[10px] text-primary-container uppercase tracking-widest">DATE
+                                                                OF JOURNEY</label>
+                                                        <div class="relative">
+                                                                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary text-[20px]"
+                                                                        style="font-variation-settings: 'FILL' 0;">calendar_month</span>
+                                                                <input name="journey_date"
+                                                                        class="w-full h-12 pl-12 pr-10 bg-secondary-fixed/20 border border-secondary-fixed rounded-sm focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-body-md text-body-md text-primary-container"
+                                                                        type="date" />
+                                                                <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none"
+                                                                        style="font-variation-settings: 'FILL' 0;">event</span>
+                                                        </div>
+                                                </div>
+                                                <div class="pt-6 space-y-4">
+                                                        <!-- Validation error message -->
+                                                        <div id="form-error"
+                                                                class="hidden items-center gap-2 bg-red-50 border border-red-300 text-red-700 text-xs font-semibold px-4 py-3 rounded-sm">
+                                                                <span
+                                                                        class="material-symbols-outlined text-[16px]">error</span>
+                                                                <span id="form-error-text">Please fill in all fields
+                                                                        before continuing.</span>
+                                                        </div>
+                                                        <button id="buy-ticket-btn"
+                                                                class="w-full h-[50px] bg-primary-container text-white rounded-sm font-label-caps text-[12px] tracking-[0.1em] hover:bg-primary transition-colors hover:scale-[1.02] active:scale-[0.98] duration-150 uppercase"
+                                                                type="submit">
+                                                                BUY TICKET
+                                                        </button>
+                                                        <button onclick="goToPayment(event)"
+                                                                class="w-full h-[50px] bg-[#f8fbff] border border-primary-container text-primary-container rounded-sm font-label-caps text-[12px] tracking-[0.1em] hover:bg-primary-container/5 transition-colors hover:scale-[1.02] active:scale-[0.98] duration-150 uppercase font-semibold"
+                                                                type="button">
+                                                                PROCEED TO PAYMENT
+                                                        </button>
+                                                </div>
+                                        </form>
+                                </div>
+                        </div>
+                </div>
+        </main>
+        <!-- Footer Component -->
+        <footer
+                class="w-full border-t border-primary/10 bg-white/80 dark:bg-primary backdrop-blur-xl text-on-surface dark:text-on-primary-container relative z-10">
+                <div
+                        class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-8 w-full max-w-container-max mx-auto">
+                        <div
+                                class="font-headline-md text-headline-md font-bold tracking-[0.1em] text-primary dark:text-secondary-fixed mb-4 md:mb-0 uppercase">
+                                TRAJET
+                        </div>
+                        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-4 md:mb-0">
+                                <a class="text-outline hover:text-secondary transition-colors font-label-caps text-[11px] uppercase tracking-wider"
+                                        href="#">Terms of Service</a>
+                                <a class="text-outline hover:text-secondary transition-colors font-label-caps text-[11px] uppercase tracking-wider"
+                                        href="#">Privacy Policy</a>
+                                <a class="text-outline hover:text-secondary transition-colors font-label-caps text-[11px] uppercase tracking-wider"
+                                        href="#">Contact</a>
+                                <a class="text-outline hover:text-secondary transition-colors font-label-caps text-[11px] uppercase tracking-wider"
+                                        href="#">Network Map</a>
+                        </div>
+                        <div class="font-body-md text-[13px] text-outline">
+                                © 2024 TRAJET. Engineered for precision.
+                        </div>
+                </div>
+        </footer>
+        <script>
+                // Subtle Parallax Effect for Glass Cards
+                document.addEventListener('mousemove', (e) => {
+                        const cards = document.querySelectorAll('.parallax-element');
+                        const mouseX = e.clientX / window.innerWidth - 0.5;
+                        const mouseY = e.clientY / window.innerHeight - 0.5;
+                        cards.forEach(card => {
+                                const rotateX = mouseY * -10 + 'deg';
+                                const rotateY = mouseX * 10 + 'deg';
+                                card.style.setProperty('--mouse-x', rotateY);
+                                card.style.setProperty('--mouse-y', rotateX);
+                        });
+                });
+
+                // ── Profile dropdown toggle ──────────────────────────────────
+                function toggleProfileMenu() {
+                        const dropdown = document.getElementById('profile-dropdown');
+                        if (dropdown) dropdown.classList.toggle('hidden');
+                }
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function (e) {
+                        const wrapper = document.getElementById('profile-menu-wrapper');
+                        if (wrapper && !wrapper.contains(e.target)) {
+                                const dropdown = document.getElementById('profile-dropdown');
+                                if (dropdown) dropdown.classList.add('hidden');
+                        }
+                });
+
+                // ── Form validation ─────────────────────────────────────────
+                function validateForm() {
+                        const dep = document.getElementById('dep-input');
+                        const dest = document.getElementById('dest-input');
+                        const date = document.querySelector('input[name="journey_date"]');
+                        const errorBox = document.getElementById('form-error');
+                        const errorText = document.getElementById('form-error-text');
+
+                        if (!dep.value.trim()) {
+                                showError('Please enter a departure city.', dep);
+                                return false;
+                        }
+                        if (!dest.value.trim()) {
+                                showError('Please add a destination city.', dest);
+                                return false;
+                        }
+                        if (!date.value) {
+                                showError('Please select a date of journey.', date);
+                                return false;
+                        }
+                        errorBox.classList.add('hidden');
+                        return true;
+
+                        function showError(msg, field) {
+                                errorText.textContent = msg;
+                                errorBox.classList.remove('hidden');
+                                errorBox.classList.add('flex');
+                                field.focus();
+                                field.style.borderColor = '#dc2626';
+                                setTimeout(() => { field.style.borderColor = ''; }, 2000);
+                        }
+                }
+
+                // Hook BUY TICKET submit
+                const bookingForm = document.querySelector('form[method="POST"]');
+                if (bookingForm) {
+                        bookingForm.addEventListener('submit', function (e) {
+                                if (!validateForm()) e.preventDefault();
+                        });
+                }
+
+                // PROCEED TO PAYMENT also validates first
+                function goToPayment(e) {
+                        if (validateForm()) {
+                                window.location.href = "{% url 'transit:payment' %}";
+                        }
+                }
+        </script>
+
+        <!-- City Autocomplete: cities loaded from your CSV via Django -->
+        <script>
+                const INDIAN_CITIES = {{ cities_json| safe }};
+
+                function setupAutocomplete(inputId, listId) {
+                        const input = document.getElementById(inputId);
+                        const list = document.getElementById(listId);
+                        if (!input || !list) return;
+
+                        input.addEventListener('input', function () {
+                                const query = input.value.trim().toLowerCase();
+                                list.innerHTML = '';
+                                if (query.length < 1) { list.classList.add('hidden'); return; }
+
+                                const matches = INDIAN_CITIES.filter(c => c.toLowerCase().startsWith(query));
+                                if (matches.length === 0) { list.classList.add('hidden'); return; }
+
+                                matches.forEach(city => {
+                                        const li = document.createElement('li');
+                                        li.textContent = city;
+                                        li.style.cssText = 'padding:10px 16px;cursor:pointer;font-size:14px;color:#042b5b;border-bottom:1px solid #e8f0ff;transition:background 0.1s;';
+                                        li.addEventListener('mouseenter', () => li.style.background = '#d3e3ff');
+                                        li.addEventListener('mouseleave', () => li.style.background = 'white');
+                                        li.addEventListener('mousedown', function (e) {
+                                                e.preventDefault();
+                                                input.value = city;
+                                                list.classList.add('hidden');
+                                        });
+                                        list.appendChild(li);
+                                });
+                                list.classList.remove('hidden');
+                        });
+
+                        input.addEventListener('blur', () => {
+                                setTimeout(() => list.classList.add('hidden'), 150);
+                        });
+
+                        input.addEventListener('focus', function () {
+                                if (input.value.trim().length > 0) input.dispatchEvent(new Event('input'));
+                        });
+                }
+
+                setupAutocomplete('dep-input', 'dep-list');
+                setupAutocomplete('dest-input', 'dest-list');
+        </script>
+        <script>
+                // Swap button: swaps the column positions while keeping the button row fixed in the middle
+                document.addEventListener('DOMContentLoaded', function () {
+                        const btn       = document.getElementById('swap-btn');
+                        const container = document.getElementById('swap-container');
+                        const depCol    = document.getElementById('dep-col');
+                        const destCol   = document.getElementById('dest-col');
+                        const depInput  = document.getElementById('dep-input');
+                        const destInput = document.getElementById('dest-input');
+
+                        if (!btn || !depCol || !destCol) return;
+
+                        // The button row is the middle sibling — it never moves
+                        const btnRow = btn.parentElement;
+
+                        btn.addEventListener('click', function () {
+                                // 1. Swap INPUT VALUES
+                                const tempVal    = depInput.value;
+                                depInput.value   = destInput.value;
+                                destInput.value  = tempVal;
+
+                                // 2. Swap LABEL TEXT
+                                const depLabel   = depCol.querySelector('label');
+                                const destLabel  = destCol.querySelector('label');
+                                const tempLabel  = depLabel.textContent;
+                                depLabel.textContent  = destLabel.textContent;
+                                destLabel.textContent = tempLabel;
+
+                                // 3. Swap ICON (my_location ↔ location_on)
+                                const depIcon    = depCol.querySelector('.material-symbols-outlined');
+                                const destIcon   = destCol.querySelector('.material-symbols-outlined');
+                                const tempIcon   = depIcon.textContent.trim();
+                                depIcon.textContent  = destIcon.textContent.trim();
+                                destIcon.textContent = tempIcon;
+
+                                // 4. Swap NAME attributes so form POSTs correct field names
+                                const tempName       = depInput.getAttribute('name');
+                                depInput.setAttribute('name', destInput.getAttribute('name'));
+                                destInput.setAttribute('name', tempName);
+
+                                // 5. Swap DOM POSITIONS — btnRow stays put as it's a separate sibling
+                                if (depCol === container.firstElementChild) {
+                                        // dep is on top → move dest before dep
+                                        container.insertBefore(destCol, depCol);
+                                } else {
+                                        // dest is on top → move dep before dest
+                                        container.insertBefore(depCol, destCol);
+                                }
+                        });
+                });
+        </script>
+
+</body>
+
+</html>

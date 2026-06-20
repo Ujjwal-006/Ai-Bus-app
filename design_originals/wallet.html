@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Manrope:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 240, 255, 0.5);
+    }
+    .blueprint-bg {
+      background-image: 
+        linear-gradient(rgba(226, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(226, 240, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#dad9de",
+            "on-surface-variant": "#43474f",
+            "on-primary-container": "#7794ca",
+            "secondary-fixed-dim": "#a3c9ff",
+            "on-tertiary-fixed": "#001f29",
+            "on-secondary-fixed": "#001c39",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#004882",
+            "primary-fixed-dim": "#abc7ff",
+            "primary-container": "#042b5b",
+            "outline": "#747780",
+            "surface-container": "#eeedf2",
+            "on-secondary-container": "#003c6f",
+            "error": "#ba1a1a",
+            "tertiary": "#001a24",
+            "surface-variant": "#e3e2e7",
+            "inverse-primary": "#abc7ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f4f3f8",
+            "on-tertiary-container": "#509cba",
+            "on-background": "#1a1b1f",
+            "surface-container-highest": "#e3e2e7",
+            "secondary": "#0060ab",
+            "on-error-container": "#93000a",
+            "inverse-on-surface": "#f1f0f5",
+            "tertiary-fixed-dim": "#86d0f0",
+            "surface": "#faf9fd",
+            "primary": "#001737",
+            "error-container": "#ffdad6",
+            "background": "#faf9fd",
+            "on-surface": "#1a1b1f",
+            "surface-bright": "#faf9fd",
+            "outline-variant": "#c4c6d0",
+            "on-error": "#ffffff",
+            "tertiary-container": "#00303f",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#d3e3ff",
+            "inverse-surface": "#2f3034",
+            "surface-container-high": "#e9e7ec",
+            "secondary-container": "#61a9ff",
+            "on-primary-fixed-variant": "#284678",
+            "primary-fixed": "#d7e3ff",
+            "on-tertiary-fixed-variant": "#004d63",
+            "on-primary-fixed": "#001b3f",
+            "tertiary-fixed": "#bce9ff",
+            "surface-tint": "#415e91",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "container-max": "1440px",
+            "margin-mobile": "20px",
+            "gutter": "24px",
+            "unit": "4px",
+            "margin-desktop": "64px"
+          },
+          "fontFamily": {
+            "display-hero-mobile": ["Inter"],
+            "body-md": ["Manrope"],
+            "label-caps": ["Manrope"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-lg": ["Manrope"],
+            "display-hero": ["Inter"]
+          },
+          "fontSize": {
+            "display-hero-mobile": ["48px", {"lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "600"}],
+            "headline-lg": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "display-hero": ["90px", {"lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background font-body-md text-on-surface blueprint-bg selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-white/60 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">TRAJET</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:schedules' %}">Schedules</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:my_bookings' %}">My Bookings</a>
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-caps text-label-caps" href="{% url 'transit:wallet' %}">Wallets</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:alerts' %}">Alerts</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:text-secondary transition-colors">notifications</button>
+<a href="{% url 'transit:account_settings' %}" class="font-label-caps text-label-caps border border-primary px-4 py-2 hover:bg-primary hover:text-white transition-all active:scale-95 block text-center">Profile</a>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Page Header Section -->
+<div class="mb-16">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">Wallets</h1>
+<p class="text-on-surface-variant font-body-lg">Manage your digital transit assets and payment methods.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Primary Balance Card (Main Feature) -->
+<div class="md:col-span-8 group">
+<div class="relative h-full bg-primary p-12 text-white flex flex-col justify-between overflow-hidden">
+
+<div class="relative z-10">
+<span class="font-label-caps text-label-caps opacity-60 tracking-[0.2em]">CURRENT ASSETS</span>
+<h2 class="font-display-hero text-display-hero mt-4">10000</h2>
+<p class="font-headline-md text-headline-md opacity-80">TRAJET Credits</p>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8 mt-12">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] opacity-50 mb-1 uppercase">Next Auto-topup</span>
+<span class="font-body-md">250.00 Credits at 100.00 threshold</span>
+</div>
+</div>
+<button class="bg-white text-primary px-8 py-4 font-label-caps text-label-caps font-bold flex items-center gap-3 transition-transform active:scale-95 group-hover:bg-secondary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+              Add Funds
+            </button>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Status Card -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="glass-card p-8 flex flex-col justify-center items-center text-center flex-1">
+<div class="w-16 h-16 rounded-full bg-secondary-container/20 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary text-3xl">verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Secure Transit</h3>
+<p class="text-on-surface-variant text-body-md">Your wallet is encrypted with hardware-level security protocols.</p>
+</div>
+<div class="bg-surface-container-high border border-outline-variant/10 p-8 flex-1">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant">MONTHLY USAGE</h4>
+<span class="text-secondary font-bold font-body-md">84%</span>
+</div>
+<div class="w-full bg-outline-variant/20 h-1 mb-6">
+<div class="bg-secondary h-full w-[84%] transition-all duration-1000"></div>
+</div>
+<p class="text-on-surface-variant text-sm">You've saved 12% on fares this month using Credits.</p>
+</div>
+</div>
+<!-- Payment Methods (Technical Blueprint Cards) -->
+<div class="md:col-span-4">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Payment Methods</h3>
+<div class="flex flex-col gap-4">
+<!-- Card 1 -->
+<div class="glass-card p-6 relative overflow-hidden group cursor-pointer transition-all hover:bg-white">
+<div class="flex justify-between items-start relative z-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+<span class="font-body-md font-semibold text-primary">•••• 4921</span>
+</div>
+<span class="font-label-caps text-[10px] px-2 py-1 bg-primary text-white">DEFAULT</span>
+</div>
+<div class="mt-8 relative z-10">
+<p class="font-label-caps text-label-caps text-on-surface-variant">EXPIRY</p>
+<p class="font-body-md text-primary">09/27</p>
+</div>
+<div class="absolute bottom-0 right-0 w-24 h-24 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
+<span class="material-symbols-outlined text-[96px]">payments</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="border border-outline-variant/20 p-6 relative overflow-hidden group cursor-pointer hover:border-secondary transition-all">
+<div class="flex justify-between items-start relative z-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">account_balance_wallet</span>
+<span class="font-body-md font-semibold text-primary">•••• 1108</span>
+</div>
+</div>
+<div class="mt-8 relative z-10">
+<p class="font-label-caps text-label-caps text-on-surface-variant">EXPIRY</p>
+<p class="font-body-md text-primary">12/25</p>
+</div>
+</div>
+<!-- Add New Button -->
+<button class="w-full border-2 border-dashed border-outline-variant/30 py-6 flex flex-col items-center justify-center gap-2 text-on-surface-variant hover:text-secondary hover:border-secondary transition-all group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+<span class="font-label-caps text-label-caps">Add New Method</span>
+</button>
+</div>
+</div>
+<!-- Transaction History -->
+<div class="md:col-span-8">
+<div class="flex justify-between items-end mb-6">
+<h3 class="font-headline-md text-headline-md text-primary">History</h3>
+<button class="text-secondary font-label-caps text-label-caps hover:underline">Download Statements</button>
+</div>
+<div class="glass-card overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/10 bg-surface-container-low/50">
+<th class="px-8 py-4 font-label-caps text-label-caps text-on-surface-variant">Description</th>
+<th class="px-8 py-4 font-label-caps text-label-caps text-on-surface-variant">Date</th>
+<th class="px-8 py-4 font-label-caps text-label-caps text-on-surface-variant">Status</th>
+<th class="px-8 py-4 font-label-caps text-label-caps text-on-surface-variant text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 -->
+<tr class="hover:bg-secondary-container/5 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-error-container/20 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">flight_takeoff</span>
+</div>
+<div>
+<p class="font-body-md font-semibold text-primary">Paris Hyperloop Terminal</p>
+<p class="text-xs text-on-surface-variant">Travel • Station P-24</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant font-body-md">Oct 24, 2024</td>
+<td class="px-8 py-6">
+<span class="text-[10px] font-bold px-2 py-0.5 border border-outline-variant/30 text-on-surface-variant">SETTLED</span>
+</td>
+<td class="px-8 py-6 text-right font-semibold text-primary">- 45.00</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-secondary-container/5 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-tertiary-fixed/30 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">add_card</span>
+</div>
+<div>
+<p class="font-body-md font-semibold text-primary">Credit Recharge</p>
+<p class="text-xs text-on-surface-variant">Wallet • Visa •••• 4921</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant font-body-md">Oct 22, 2024</td>
+<td class="px-8 py-6">
+<span class="text-[10px] font-bold px-2 py-0.5 border border-outline-variant/30 text-on-surface-variant">COMPLETED</span>
+</td>
+<td class="px-8 py-6 text-right font-semibold text-secondary">+ 500.00</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-secondary-container/5 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-error-container/20 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">directions_subway</span>
+</div>
+<div>
+<p class="font-body-md font-semibold text-primary">Metro Transfer - Line 14</p>
+<p class="text-xs text-on-surface-variant">Travel • Multi-modal</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant font-body-md">Oct 21, 2024</td>
+<td class="px-8 py-6">
+<span class="text-[10px] font-bold px-2 py-0.5 border border-outline-variant/30 text-on-surface-variant">SETTLED</span>
+</td>
+<td class="px-8 py-6 text-right font-semibold text-primary">- 2.40</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-secondary-container/5 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-error-container/20 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">local_cafe</span>
+</div>
+<div>
+<p class="font-body-md font-semibold text-primary">TRAJET Lounge Services</p>
+<p class="text-xs text-on-surface-variant">Amenities • London Hub</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant font-body-md">Oct 20, 2024</td>
+<td class="px-8 py-6">
+<span class="text-[10px] font-bold px-2 py-0.5 border border-outline-variant/30 text-on-surface-variant">SETTLED</span>
+</td>
+<td class="px-8 py-6 text-right font-semibold text-primary">- 18.25</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 bg-surface-container-low/30 border-t border-outline-variant/10 text-center">
+<button class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">View All Transactions</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Promotional Section / Featured Card -->
+<section class="mt-24">
+<div class="relative w-full h-[400px] overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="A high-tech digital rendering of a futuristic transit hub with sleek, navy blue architectural elements and holographic displays. The lighting is cold and precise, featuring sharp cyan neon lines that define the space's structural integrity. This minimalist setting reflects the TRAJET brand identity, combining industrial precision with a modern, glassmorphic aesthetic under a bright, high-key atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIYkL1gj6WAs8CIPWoddT29O5_l6q4QybP0hD__QhdkW8UKWfBBxgTLYNQz0Iwawf6Tif4GVeur9Cog1LvynqAHj3MC4a4TzfXn38BhsXgfCJMfB-5Rx1e7UviUKqY_RqzWiPVxjGRg8XR8tXXRNwsnY4k0iO-XRYRM12Iq7JpD_rYR80vi_cB0f0UPYZoFxSTQgoauHiWiEvGC9OGuCTkyZjdrW1guKsPEr89jex4blvO8M8mSA1s"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
+<div class="absolute inset-0 flex flex-col justify-center px-12 md:px-24">
+<span class="font-label-caps text-label-caps text-secondary-fixed mb-4 tracking-[0.3em]">THE PREMIUM EXPERIENCE</span>
+<h2 class="font-headline-lg text-headline-lg text-white max-w-xl mb-6">Upgrade to TRAJET Gold for unlimited network access.</h2>
+<div class="flex gap-4">
+<button class="bg-secondary-fixed text-on-secondary-fixed px-8 py-4 font-label-caps text-label-caps font-bold transition-all active:scale-95">Explore Benefits</button>
+<button class="border border-white/30 text-white px-8 py-4 font-label-caps text-label-caps hover:bg-white/10 transition-all">Learn More</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full bg-surface border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 w-full max-w-container-max mx-auto">
+<div class="flex flex-col gap-4 mb-8 md:mb-0">
+<div class="font-headline-md text-headline-md font-bold text-primary">TRAJET</div>
+<p class="text-on-surface-variant font-label-caps text-label-caps">© 2024 TRAJET. Engineered for precision.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Network Map</a>
+</div>
+<div class="mt-8 md:mt-0 flex gap-4">
+<div class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center hover:border-secondary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">language</span>
+</div>
+<div class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center hover:border-secondary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Micro-interactions for credit card hover effects
+    document.querySelectorAll('.glass-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Simple scroll reveal for navigation background
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 20) {
+        header.classList.add('shadow-sm');
+      } else {
+        header.classList.remove('shadow-sm');
+      }
+    });
+  </script>
+</body></html>

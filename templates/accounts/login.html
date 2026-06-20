@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}TRAJET | Login{% endblock %}
+{% block content %}
+<main class="relative min-h-screen flex items-center justify-center pt-24 px-4 overflow-hidden">
+    <div class="absolute inset-0 gradient-mesh pointer-events-none"></div>
+    <div class="absolute top-1/4 -left-20 w-96 h-96 bg-secondary-fixed/10 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-tertiary-fixed/10 rounded-full blur-[100px]"></div>
+    <div class="glass-card w-full max-w-[480px] p-8 md:p-12 rounded-lg shadow-2xl relative z-10">
+        <div class="text-center mb-10">
+            <h1 class="font-headline-lg text-headline-lg text-primary mb-2">Welcome Back</h1>
+            <p class="text-on-surface-variant font-body-md">Precision transit management at your fingertips.</p>
+        </div>
+        <form class="space-y-6" method="POST" action="{% url 'transit:login_user' %}">
+            {% csrf_token %}
+            <div class="space-y-2">
+                <label class="font-label-caps text-label-caps text-on-surface-variant block">Email Address</label>
+                <div class="relative">
+                    <input class="w-full bg-secondary-fixed/20 border border-outline-variant/30 rounded px-4 py-3 text-body-md focus:outline-none focus:border-secondary transition-all placeholder:text-outline-variant/60" placeholder="name@company.com" type="email" name="username" required/>
+                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant">mail</span>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant block">Password</label>
+                    <a class="font-label-caps text-label-caps text-secondary hover:underline" href="{% url 'transit:forgot_password' %}">Forgot?</a>
+                </div>
+                <div class="relative">
+                    <input class="w-full bg-secondary-fixed/20 border border-outline-variant/30 rounded px-4 py-3 text-body-md focus:outline-none focus:border-secondary transition-all placeholder:text-outline-variant/60" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226" type="password" name="password" required/>
+                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant">lock</span>
+                </div>
+            </div>
+            {% if form.errors %}
+            <div class="bg-red-50 border border-red-300 text-red-700 text-sm px-4 py-3 rounded">
+                Invalid email or password. Please try again.
+            </div>
+            {% endif %}
+            <button class="w-full bg-primary text-on-primary py-4 font-label-caps text-label-caps rounded font-bold hover:bg-primary-container active:scale-[0.98] transition-all duration-150 uppercase tracking-widest" type="submit">Login</button>
+        </form>
+        <div class="relative my-8">
+            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/20"></div></div>
+            <div class="relative flex justify-center text-xs uppercase">
+                <span class="bg-white/0 px-2 text-on-surface-variant font-label-caps text-[10px]">Or continue with</span>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <button class="flex items-center justify-center gap-2 border border-primary/20 py-3 rounded hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+                <span class="font-label-caps text-label-caps text-primary">Google</span>
+            </button>
+            <button class="flex items-center justify-center gap-2 border border-primary/20 py-3 rounded hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+                <span class="material-symbols-outlined text-[20px] text-primary">apps</span>
+                <span class="font-label-caps text-label-caps text-primary">Apple</span>
+            </button>
+        </div>
+        <p class="text-center mt-10 text-on-surface-variant font-body-md text-sm">
+            New to the platform? <a class="text-secondary font-bold hover:underline" href="{% url 'transit:register' %}">Create an account</a>
+        </p>
+    </div>
+</main>
+{% endblock %}

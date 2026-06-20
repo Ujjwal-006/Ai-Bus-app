@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TRAJET - Live Bus Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c4c6d0",
+                        "inverse-primary": "#abc7ff",
+                        "on-background": "#1a1b1f",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#747780",
+                        "background": "#faf9fd",
+                        "primary-fixed": "#d7e3ff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#00303f",
+                        "on-primary-fixed-variant": "#284678",
+                        "surface-container": "#eeedf2",
+                        "inverse-surface": "#2f3034",
+                        "on-secondary-fixed-variant": "#004882",
+                        "surface-dim": "#dad9de",
+                        "on-tertiary-container": "#509cba",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "secondary-fixed": "#d3e3ff",
+                        "surface-variant": "#e3e2e7",
+                        "secondary": "#0060ab",
+                        "on-secondary-fixed": "#001c39",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "tertiary": "#001a24",
+                        "secondary-container": "#61a9ff",
+                        "tertiary-fixed": "#bce9ff",
+                        "surface-tint": "#415e91",
+                        "on-primary-container": "#7794ca",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e3e2e7",
+                        "on-surface-variant": "#43474f",
+                        "inverse-on-surface": "#f1f0f5",
+                        "surface-bright": "#faf9fd",
+                        "primary-fixed-dim": "#abc7ff",
+                        "on-tertiary-fixed-variant": "#004d63",
+                        "tertiary-fixed-dim": "#86d0f0",
+                        "on-surface": "#1a1b1f",
+                        "on-secondary": "#ffffff",
+                        "surface": "#faf9fd",
+                        "on-secondary-container": "#003c6f",
+                        "on-tertiary-fixed": "#001f29",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e9e7ec",
+                        "primary": "#001737",
+                        "on-primary-fixed": "#001b3f",
+                        "surface-container-low": "#f4f3f8",
+                        "primary-container": "#042b5b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "unit": "4px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope"],
+                        "headline-lg": ["Inter"],
+                        "display-hero-mobile": ["Inter"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Inter"],
+                        "display-hero": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-hero-mobile": ["48px", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display-hero": ["90px", { "lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid #E2F0FF;
+        }
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(226, 240, 255, 0.5) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(226, 240, 255, 0.5) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen grid-bg">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 dark:bg-primary/60 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<img alt="TRAJET Logo" class="h-8" src="https://lh3.googleusercontent.com/aida/AP1WRLv_hjAYUE_5wv7chpMAVctgNQQ8aHPB87Pv6cD_k2bqj3eNCIFJa8SpQnUg0pKbM2HbtX3GLNFLiKBAyCbxULtmR3bKY7FyfY7MRpeuvmifcU8tIyjT-MqduWDv_i7hdFbhvAoH8sKusYqTKrTHhdfEhlKprU-v_2IfbXCK7K0Q7AWguV2S-fjaQ08HcNvGLiLJ-VAIiN-1O2oXM_cjlmxdLPPgmoQLHKpsf35VV7rS1zHEPebVmzeEhdU"/>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">Schedules</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-bold border-b-2 border-secondary pb-1 font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">My Bookings</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">Wallets</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">Alerts</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="px-6 py-2 border border-primary-container text-primary-container font-label-caps text-label-caps rounded hover:bg-primary-container hover:text-white transition-colors duration-150">
+                    Login
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-[100px] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-24">
+<header class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary-container mb-2">Live Tracker</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Mumbai - Pune Express Route</p>
+</header>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Map Area (Canvas) -->
+<div class="flex-grow glass-panel rounded-lg overflow-hidden h-[600px] relative border border-outline-variant/20">
+<div class="absolute inset-0 bg-surface-container-lowest flex items-center justify-center">
+<!-- Map Placeholder Image -->
+<img alt="Map Interface" class="w-full h-full object-cover opacity-80" data-alt="A highly detailed top-down view of a modern city map interface, shown in a pristine light-mode aesthetic. The map features minimal geographic details with precise, ultra-thin road networks in soft blues and grays against a bright white background. A highlighted route path curves elegantly through the grid, marked with sharp geometric transit points. The overall style is futuristic, technical, and perfectly aligns with a Swiss-style transit tracking application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMt0e6CMs5wtRw13xRoHEm4jcO6bhvFxWdi08EyKihxRn-_03gayJVuhD3B9gnIsfuv-e-QkG2vX77RgOeeWMZc0M6aINX5iCpz1PbZIXUX61GEKSYOph1aSFhLSfRQD8AEqnGmkJ_SahUTPVQw3JRg4H7FbdOj4m2cZCNFwi3aQ0B_VL777obNWCbnrd0WrNTi0zBVBpYWTjAppJCJ2fMvJe4kZ8Tq6pa64QHScsIXWzhPqlwl9xs"/>
+<!-- Overlay Elements for Map -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center shadow-lg border-2 border-white animate-pulse">
+<span class="material-symbols-outlined text-white" data-weight="fill">directions_bus</span>
+</div>
+<div class="mt-2 bg-white px-3 py-1 rounded text-primary-container font-label-caps text-label-caps shadow-md border border-outline-variant/20">
+                            BUS 402 - EN ROUTE
+                        </div>
+</div>
+</div>
+</div>
+<!-- Sidebar Info Panel -->
+<div class="w-full lg:w-[400px] shrink-0 flex flex-col gap-gutter">
+<!-- Status Card -->
+<div class="glass-panel p-6 rounded-lg">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest block mb-1">CURRENT STATION</span>
+<h2 class="font-headline-md text-headline-md text-primary-container">Lonavala Transit Hub</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-weight="fill">location_on</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="p-4 bg-surface-container-lowest border border-outline-variant/20 rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">ETA TO DEST.</span>
+<div class="font-headline-md text-headline-md text-primary-container">1h 45m</div>
+</div>
+<div class="p-4 bg-surface-container-lowest border border-outline-variant/20 rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">SPEED</span>
+<div class="font-headline-md text-headline-md text-primary-container">65 <span class="text-sm font-normal">km/h</span></div>
+</div>
+</div>
+<!-- Occupancy -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">PASSENGER OCCUPANCY</span>
+<span class="font-label-caps text-label-caps text-primary-container">42/60</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[70%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Route Timeline Card -->
+<div class="glass-panel p-6 rounded-lg flex-grow">
+<h3 class="font-label-caps text-label-caps text-secondary tracking-widest mb-6">ROUTE PROGRESS</h3>
+<div class="relative">
+<!-- Vertical Line -->
+<div class="absolute left-[11px] top-2 bottom-4 w-[2px] bg-surface-container-highest"></div>
+<div class="absolute left-[11px] top-2 h-[40%] w-[2px] bg-secondary z-10"></div>
+<div class="flex flex-col gap-6 relative z-20">
+<!-- Passed Station -->
+<div class="flex gap-4 opacity-50">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center shrink-0 mt-1">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface line-through">Mumbai Central</span>
+<span class="font-label-caps text-label-caps text-outline">08:00 AM</span>
+</div>
+</div>
+</div>
+<!-- Current Station -->
+<div class="flex gap-4">
+<div class="w-6 h-6 rounded-full bg-secondary border-2 border-white flex items-center justify-center shrink-0 mt-1 shadow-[0_0_0_4px_rgba(0,96,171,0.2)]">
+<div class="w-2 h-2 rounded-full bg-white"></div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-primary-container font-bold">Lonavala Transit Hub</span>
+<span class="font-label-caps text-label-caps text-secondary">ARRIVED</span>
+</div>
+<span class="text-sm text-on-surface-variant block mt-1">Platform 2 - 5 min halt</span>
+</div>
+</div>
+<!-- Upcoming Station -->
+<div class="flex gap-4">
+<div class="w-6 h-6 rounded-full bg-white border-2 border-surface-container-highest flex items-center justify-center shrink-0 mt-1">
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface">Pune Station</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">11:30 AM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface dark:bg-primary border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-secondary-fixed mb-6 md:mb-0">
+                TRAJET
+            </div>
+<div class="flex gap-6 mb-6 md:mb-0">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Network Map</a>
+</div>
+<div class="text-on-surface-variant dark:text-outline-variant font-body-md text-body-md">
+                © 2024 TRAJET. Engineered for precision.
+            </div>
+</div>
+</footer>
+</body></html>

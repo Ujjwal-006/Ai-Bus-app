@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %}Choose Your Seat | TRAJET{% endblock %}
+{% block content %}
+<main class="pt-28 pb-24 px-4 md:px-16 max-w-5xl mx-auto">
+    <div class="mb-10">
+        <div class="flex items-center gap-3 mb-3">
+            <a href="{% url 'transit:schedules' %}" class="w-9 h-9 rounded-full bg-white border border-blue-200 flex items-center justify-center hover:bg-blue-50 transition-colors shadow-sm">
+                <span class="material-symbols-outlined text-blue-900 text-lg">arrow_back</span>
+            </a>
+            <div class="text-xs font-semibold text-blue-500 tracking-widest uppercase">Bus Seat Map</div>
+        </div>
+        <h1 class="font-inter text-4xl font-bold text-blue-950 mb-1">Choose Your Seat</h1>
+        <p class="text-gray-500">
+            <span class="font-semibold text-blue-900">{{ dep_station }}</span>
+            &nbsp;&rarr;&nbsp;
+            <span class="font-semibold text-blue-900">{{ dest_station }}</span>
+            &nbsp;&middot;&nbsp; {{ journey_date }}
+        </p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+            <div class="glass-card rounded-2xl p-8 shadow-lg">
+                <div class="flex flex-wrap gap-5 mb-8 text-xs font-semibold">
+                    <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md bg-blue-200 border-2 border-blue-400"></div><span class="text-gray-600">Available</span></div>
+                    <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md bg-red-200 border-2 border-red-300"></div><span class="text-gray-600">Booked</span></div>
+                    <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md bg-blue-950 border-2 border-blue-600"></div><span class="text-gray-600">Your Selection</span></div>
+                </div>
+                <div class="flex justify-between items-center mb-6 pb-4 border-b border-blue-100">
+                    <span class="text-xs text-gray-400 font-semibold tracking-widest uppercase">&larr; Front of Bus</span>
+                    <div class="flex items-center gap-2 bg-blue-950 text-white text-xs font-bold px-4 py-2 rounded-lg">
+                        <span class="material-symbols-outlined text-base">directions_bus</span> DRIVER
+                    </div>
+                </div>
+                <div class="flex justify-center gap-2 mb-3">
+                    <div class="w-6"></div>
+                    <div class="w-11 text-center text-xs text-gray-400 font-bold">A</div>
+                    <div class="w-11 text-center text-xs text-gray-400 font-bold">B</div>
+                    <div class="w-8"></div>
+                    <div class="w-11 text-center text-xs text-gray-400 font-bold">C</div>
+                    <div class="w-11 text-center text-xs text-gray-400 font-bold">D</div>
+                </div>
+                <div id="seat-map" class="space-y-2"></div>
+                <div class="mt-6 pt-4 border-t border-blue-100 text-center text-xs text-gray-400 font-semibold tracking-widest uppercase">&larr; Back of Bus</div>
+            </div>
+        </div>
+        <div class="lg:col-span-1">
+            <div class="glass-card rounded-2xl p-6 shadow-lg sticky top-28">
+                <h2 class="font-inter font-bold text-lg text-blue-950 mb-5">Booking Summary</h2>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-blue-500 text-lg mt-0.5">my_location</span>
+                        <div><div class="text-xs text-gray-400 font-semibold uppercase tracking-widest mb-0.5">From</div><div class="font-bold text-blue-950">{{ dep_station }}</div></div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-blue-500 text-lg mt-0.5">location_on</span>
+                        <div><div class="text-xs text-gray-400 font-semibold uppercase tracking-widest mb-0.5">To</div><div class="font-bold text-blue-950">{{ dest_station }}</div></div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-blue-500 text-lg mt-0.5">calendar_month</span>
+                        <div><div class="text-xs text-gray-400 font-semibold uppercase tracking-widest mb-0.5">Date</div><div class="font-bold text-blue-950">{{ journey_date }}</div></div>
+                    </div>
+                </div>
+                <div class="border-t border-blue-100 pt-5 mb-5">
+                    <div class="text-xs text-gray-400 font-semibold uppercase tracking-widest mb-2">Selected Seat</div>
+                    <div id="seat-display" class="font-inter text-2xl font-bold text-gray-300 tracking-wide">&mdash; Pick a seat</div>
+                </div>
+                <form method="POST" action="{% url 'transit:seat_selection' %}" id="confirm-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="schedule_id" value="{{ schedule.id }}"/>
+                    <input type="hidden" name="selected_seat" id="hidden-seat-input" value=""/>
+                    <div id="selection-info" class="hidden bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 text-sm text-blue-800">
+                        Seat <strong id="info-seat-label"></strong> is ready to book.
+                    </div>
+                    <button type="submit" id="confirm-btn" disabled class="w-full py-4 bg-blue-950 text-white font-bold text-sm tracking-widest uppercase rounded-xl opacity-40 cursor-not-allowed transition-all duration-200">Confirm &amp; Book</button>
+                </form>
+                <p class="text-xs text-gray-400 text-center mt-4">Your seat is held until payment is complete.</p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block extra_js %}
+<script>
+const BOOKED_SEATS = {{ booked_seats|safe }};
+const ROWS = 10;
+const COLS = ['A', 'B', 'C', 'D'];
+let selectedSeat = null;
+const map = document.getElementById('seat-map');
+
+for (let row = 1; row <= ROWS; row++) {
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'flex items-center gap-2 justify-center';
+    const rowLabel = document.createElement('span');
+    rowLabel.className = 'w-6 text-right text-xs text-gray-400 font-mono font-bold';
+    rowLabel.textContent = row;
+    rowDiv.appendChild(rowLabel);
+    COLS.forEach((col, idx) => {
+        if (idx === 2) {
+            const aisle = document.createElement('div');
+            aisle.className = 'w-8 flex items-center justify-center';
+            const aisleInner = document.createElement('div');
+            aisleInner.className = 'h-4 w-px bg-blue-200';
+            aisle.appendChild(aisleInner);
+            rowDiv.appendChild(aisle);
+        }
+        const seatId = `${row}${col}`;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'seat';
+        btn.textContent = seatId;
+        btn.dataset.seat = seatId;
+        if (BOOKED_SEATS.includes(seatId)) {
+            btn.classList.add('seat-booked');
+            btn.disabled = true;
+        } else {
+            btn.classList.add('seat-available');
+            btn.addEventListener('click', () => selectSeat(btn, seatId));
+        }
+        rowDiv.appendChild(btn);
+    });
+    map.appendChild(rowDiv);
+}
+
+function selectSeat(btn, seatId) {
+    document.querySelectorAll('.seat-selected').forEach(s => { s.classList.remove('seat-selected'); s.classList.add('seat-available'); });
+    btn.classList.remove('seat-available');
+    btn.classList.add('seat-selected');
+    selectedSeat = seatId;
+    document.getElementById('hidden-seat-input').value = seatId;
+    document.getElementById('seat-display').textContent = seatId;
+    document.getElementById('seat-display').classList.remove('text-gray-300');
+    document.getElementById('seat-display').classList.add('text-blue-950');
+    document.getElementById('info-seat-label').textContent = seatId;
+    document.getElementById('selection-info').classList.remove('hidden');
+    const confirmBtn = document.getElementById('confirm-btn');
+    confirmBtn.disabled = false;
+    confirmBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+    confirmBtn.classList.add('hover:bg-blue-800', 'active:scale-95');
+}
+</script>
+{% endblock %}

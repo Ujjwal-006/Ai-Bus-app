@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}TRAJET - Find Routes{% endblock %}
+{% block content %}
+<main class="pt-[140px] pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto min-h-screen">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter w-full">
+        <div class="col-span-1 lg:col-span-7 flex flex-col justify-center space-y-12 lg:pr-12">
+            <div class="space-y-6">
+                <div class="inline-block px-4 py-2 border border-secondary text-secondary font-label-caps text-[11px] bg-white/50 uppercase tracking-[0.15em] slide-up-enter">OFFICIAL TRANSIT PARTNER</div>
+                <h1 class="font-display-hero text-display-hero-mobile md:text-[100px] text-primary-container slide-up-enter font-bold leading-none tracking-tight">SEAMLESS<br/>TRAVEL.</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl slide-up-enter" style="font-size:18px;line-height:1.6;">Book an open route pass, skip the rigid schedules, and hop on any bus heading your way.</p>
+            </div>
+            <div class="flex items-center space-x-12 slide-up-enter pt-4">
+                <div class="flex items-center space-x-8 border-r border-primary/10 pr-8">
+                    <div>
+                        <div class="font-headline-lg text-[40px] text-secondary font-bold">5M+</div>
+                        <div class="font-label-caps text-[11px] text-outline mt-1 tracking-widest uppercase">RIDERS</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="font-headline-lg text-[40px] text-secondary font-bold">10K+</div>
+                    <div class="font-label-caps text-[11px] text-outline mt-1 tracking-widest uppercase">DAILY TRIPS</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-1 lg:col-span-5 relative mt-16 lg:mt-0 flex items-center justify-end">
+            <div class="booking-card p-10 w-full max-w-md shadow-lg">
+                <div class="mb-8">
+                    <h2 class="font-headline-md text-headline-md text-primary-container mb-2 font-bold tracking-wide">WHERE TO?</h2>
+                    <p class="font-body-md text-body-md text-outline text-sm">PURCHASE YOUR ROUTE PASS.</p>
+                </div>
+                <form class="space-y-6" method="GET" action="{% url 'transit:schedules' %}">
+                    <div class="space-y-2">
+                        <label class="font-label-caps text-[10px] text-primary-container uppercase tracking-widest">DEPARTURE</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary text-[20px]">my_location</span>
+                            <input name="departure" autocomplete="off" class="w-full h-12 pl-12 pr-4 bg-secondary-fixed/20 border border-secondary-fixed focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-body-md text-primary-container placeholder:text-outline" placeholder="City or Station" type="text" value="{{ departure }}"/>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="font-label-caps text-[10px] text-primary-container uppercase tracking-widest">DESTINATION</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary text-[20px]">location_on</span>
+                            <input name="destination" autocomplete="off" class="w-full h-12 pl-12 pr-4 bg-secondary-fixed/20 border border-secondary-fixed focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-body-md text-primary-container placeholder:text-outline" placeholder="City or Station" type="text" value="{{ destination }}"/>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="font-label-caps text-[10px] text-primary-container uppercase tracking-widest">DATE OF JOURNEY</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary text-[20px]">calendar_month</span>
+                            <input name="journey_date" class="w-full h-12 pl-12 pr-10 bg-secondary-fixed/20 border border-secondary-fixed focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-body-md text-primary-container" type="date"/>
+                        </div>
+                    </div>
+                    <div class="pt-6 space-y-4">
+                        <button class="w-full h-[50px] bg-primary-container text-white font-label-caps text-[12px] tracking-[0.1em] hover:bg-primary transition-colors hover:scale-[1.02] active:scale-[0.98] duration-150 uppercase" type="submit">SEARCH BUSES</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if schedules %}
+    <section class="mt-24">
+        <h2 class="font-headline-md text-headline-md text-primary mb-8">Available Buses</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for schedule in schedules %}
+            <div class="glass-card p-6 rounded-lg hover:border-secondary transition-all duration-300 transform hover:-translate-y-1">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="font-label-caps text-[10px] px-3 py-1 bg-secondary-fixed text-primary rounded">{{ schedule.bus_number }}</span>
+                    <span class="font-headline-md text-headline-md text-primary">${{ schedule.price }}</span>
+                </div>
+                <h3 class="font-headline-md text-[18px] mb-2">{{ schedule.route.departure.city }} &rarr; {{ schedule.route.destination.city }}</h3>
+                <div class="flex flex-wrap gap-x-4 gap-y-2 mb-4">
+                    <div class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-secondary text-sm">schedule</span>
+                        <span class="font-mono text-sm font-semibold">{{ schedule.departure_time|time:"H:i" }}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-secondary text-sm">airline_seat_recline_normal</span>
+                        <span class="font-mono text-sm font-semibold">{{ schedule.available_seats }} seats</span>
+                    </div>
+                </div>
+                <a href="{% url 'transit:seat_selection' %}?schedule_id={{ schedule.id }}" class="block w-full text-center bg-primary text-white py-3 font-label-caps text-label-caps rounded hover:bg-primary-container transition-colors">Select Seat</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</main>
+{% endblock %}

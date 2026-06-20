@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TRAJET | Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad9de",
+                        "on-surface-variant": "#43474f",
+                        "on-primary-container": "#7794ca",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "on-tertiary-fixed": "#001f29",
+                        "on-secondary-fixed": "#001c39",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004882",
+                        "primary-fixed-dim": "#abc7ff",
+                        "primary-container": "#042b5b",
+                        "outline": "#747780",
+                        "surface-container": "#eeedf2",
+                        "on-secondary-container": "#003c6f",
+                        "error": "#ba1a1a",
+                        "tertiary": "#001a24",
+                        "surface-variant": "#e3e2e7",
+                        "inverse-primary": "#abc7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f4f3f8",
+                        "on-tertiary-container": "#509cba",
+                        "on-background": "#1a1b1f",
+                        "surface-container-highest": "#e3e2e7",
+                        "secondary": "#0060ab",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f1f0f5",
+                        "tertiary-fixed-dim": "#86d0f0",
+                        "surface": "#faf9fd",
+                        "primary": "#001737",
+                        "error-container": "#ffdad6",
+                        "background": "#faf9fd",
+                        "on-surface": "#1a1b1f",
+                        "surface-bright": "#faf9fd",
+                        "outline-variant": "#c4c6d0",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#00303f",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#d3e3ff",
+                        "inverse-surface": "#2f3034",
+                        "surface-container-high": "#e9e7ec",
+                        "secondary-container": "#61a9ff",
+                        "on-primary-fixed-variant": "#284678",
+                        "primary-fixed": "#d7e3ff",
+                        "on-tertiary-fixed-variant": "#004d63",
+                        "on-primary-fixed": "#001b3f",
+                        "tertiary-fixed": "#bce9ff",
+                        "surface-tint": "#415e91",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "display-hero-mobile": ["Inter"],
+                        "body-md": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Manrope"],
+                        "display-hero": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-hero-mobile": ["48px", {"lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "display-hero": ["90px", {"lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blueprint-bg {
+            background-color: #faf9fd;
+            background-image: 
+                linear-gradient(rgba(226, 240, 255, 0.5) 1px, transparent 1px),
+                linear-gradient(90px, rgba(226, 240, 255, 0.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 240, 255, 0.8);
+        }
+        .gradient-mesh {
+            background: radial-gradient(circle at 0% 0%, rgba(211, 227, 255, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(141, 215, 247, 0.2) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen blueprint-bg relative overflow-x-hidden">
+<!-- Global Navigation Shell (Suppressed context check: Transactions/Auth usually hide nav, but following TRAJET structure) -->
+<header class="fixed top-0 w-full z-50 bg-white/60 dark:bg-primary/60 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-secondary-fixed">
+                TRAJET
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">Schedules</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">My Bookings</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">Wallets</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="#">Alerts</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-6 py-2 rounded">Login</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative min-h-screen flex items-center justify-center pt-24 px-4 overflow-hidden">
+<!-- Background Gradient Mesh -->
+<div class="absolute inset-0 gradient-mesh pointer-events-none"></div>
+<!-- Decorative Elements -->
+<div class="absolute top-1/4 -left-20 w-96 h-96 bg-secondary-fixed/10 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-tertiary-fixed/10 rounded-full blur-[100px]"></div>
+<!-- Login Container -->
+<div class="glass-card w-full max-w-[480px] p-8 md:p-12 rounded-lg shadow-2xl relative z-10">
+<div class="text-center mb-10">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">Welcome Back</h1>
+<p class="text-on-surface-variant font-body-md">Precision transit management at your fingertips.</p>
+</div>
+<form class="space-y-6" method="POST" action="{% url 'transit:login_user' %}">
+    {% csrf_token %}
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant block">Email Address</label>
+<div class="relative">
+<input class="w-full bg-secondary-fixed/20 border border-outline-variant/30 rounded px-4 py-3 text-body-md focus:outline-none focus:border-secondary transition-all placeholder:text-outline-variant/60" placeholder="name@company.com" type="email" name="username" required/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant" data-icon="mail">mail</span>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-on-surface-variant block">Password</label>
+<a class="font-label-caps text-label-caps text-secondary hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-secondary-fixed/20 border border-outline-variant/30 rounded px-4 py-3 text-body-md focus:outline-none focus:border-secondary transition-all placeholder:text-outline-variant/60" placeholder="••••••••" type="password" name="password" required/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant" data-icon="lock">lock</span>
+</div>
+</div>
+<!-- Login Button -->
+<button class="w-full bg-primary text-on-primary py-4 font-label-caps text-label-caps rounded font-bold hover:bg-primary-container active:scale-[0.98] transition-all duration-150 uppercase tracking-widest" type="submit">
+                    Login
+                </button>
+</form>
+<!-- Divider -->
+<div class="relative my-8">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/20"></div>
+</div>
+<div class="relative flex justify-center text-xs uppercase">
+<span class="bg-white/0 px-2 text-on-surface-variant font-label-caps text-[10px]">Or continue with</span>
+</div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 border border-primary/20 py-3 rounded hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<img alt="Google" class="w-5 h-5 grayscale opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXhLrujR5pizxRL1JutmVlRh8K6tOvMjxFxHUbYa-RptQ0ywpseZJqNiVt5EYuLjoPI_uULNYQK5GkosPOK3Y7WAAoiJdk008PV0vhBrjcjRz-2ISysgBtG3YGgB2rEn-ch7wRWLabfJjkS7mif8-XV9tujzURy1qNy6TlO0_PVg8DsAsi1YTzdkoyUpqA546JSJdcJAV8kqio3vnhkksM46c_hRuqhjNKbQybPZ2GimL5cAFa_ju-"/>
+<span class="font-label-caps text-label-caps text-primary">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 border border-primary/20 py-3 rounded hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="apple">apps</span>
+<span class="font-label-caps text-label-caps text-primary">Apple</span>
+</button>
+</div>
+<!-- Signup Prompt -->
+<p class="text-center mt-10 text-on-surface-variant font-body-md text-sm">
+                New to the platform? <a class="text-secondary font-bold hover:underline" href="#">Create an account</a>
+</p>
+</div>
+<!-- Technical Metadata Overlay -->
+<div class="absolute bottom-8 left-8 hidden lg:block pointer-events-none opacity-40">
+<div class="font-mono text-[10px] space-y-1 text-primary">
+<p>SYSTEM_AUTH_V4.2</p>
+<p>ENCRYPTION: AES-256-GCM</p>
+<p>LOC: 48.8566° N, 2.3522° E</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-outline-variant/10 bg-surface dark:bg-primary mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 w-full max-w-container-max mx-auto">
+<div class="mb-8 md:mb-0">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-secondary-fixed mb-2">TRAJET</div>
+<p class="text-on-surface-variant font-body-md text-sm">© 2024 TRAJET. Engineered for precision.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Network Map</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for input focus
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.classList.add('scale-[1.01]');
+                input.parentElement.parentElement.style.transition = 'transform 0.2s ease-out';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body></html>

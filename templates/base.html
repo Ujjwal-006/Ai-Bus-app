@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>{% block title %}TRAJET{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad9de", "on-surface-variant": "#43474f",
+                        "on-primary-container": "#7794ca", "secondary-fixed-dim": "#a3c9ff",
+                        "on-tertiary-fixed": "#001f29", "on-secondary-fixed": "#001c39",
+                        "on-primary": "#ffffff", "on-secondary-fixed-variant": "#004882",
+                        "primary-fixed-dim": "#abc7ff", "primary-container": "#042b5b",
+                        "outline": "#747780", "surface-container": "#eeedf2",
+                        "on-secondary-container": "#003c6f", "error": "#ba1a1a",
+                        "tertiary": "#001a24", "surface-variant": "#e3e2e7",
+                        "inverse-primary": "#abc7ff", "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f4f3f8", "on-tertiary-container": "#509cba",
+                        "on-background": "#1a1b1f", "surface-container-highest": "#e3e2e7",
+                        "secondary": "#0060ab", "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f1f0f5", "tertiary-fixed-dim": "#86d0f0",
+                        "surface": "#faf9fd", "primary": "#001737", "error-container": "#ffdad6",
+                        "background": "#faf9fd", "on-surface": "#1a1b1f",
+                        "surface-bright": "#faf9fd", "outline-variant": "#c4c6d0",
+                        "on-error": "#ffffff", "tertiary-container": "#00303f",
+                        "on-tertiary": "#ffffff", "secondary-fixed": "#d3e3ff",
+                        "inverse-surface": "#2f3034", "surface-container-high": "#e9e7ec",
+                        "secondary-container": "#61a9ff", "on-primary-fixed-variant": "#284678",
+                        "primary-fixed": "#d7e3ff", "on-tertiary-fixed-variant": "#004d63",
+                        "on-primary-fixed": "#001b3f", "tertiary-fixed": "#bce9ff",
+                        "surface-tint": "#415e91", "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                    "spacing": { "container-max": "1440px", "margin-mobile": "20px", "gutter": "24px", "unit": "4px", "margin-desktop": "64px" },
+                    "fontFamily": { "display-hero-mobile": ["Inter"], "body-md": ["Manrope"], "label-caps": ["Manrope"], "headline-lg": ["Inter"], "headline-md": ["Inter"], "body-lg": ["Manrope"], "display-hero": ["Inter"] },
+                    "fontSize": {
+                        "display-hero-mobile": ["48px", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "display-hero": ["90px", { "lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen blueprint-bg overflow-x-hidden">
+
+    <header class="fixed top-0 w-full z-50 bg-white/60 dark:bg-primary/60 backdrop-blur-xl border-b border-outline-variant/20">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+            <a href="{% url 'transit:schedules' %}" class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">TRAJET</a>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:schedules' %}">Schedules</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:my_bookings' %}">My Bookings</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:wallet' %}">Wallets</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:alerts' %}">Alerts</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="material-symbols-outlined text-primary hover:text-secondary transition-colors" onclick="toggleTheme()">dark_mode</button>
+                <span class="material-symbols-outlined text-primary">notifications</span>
+                {% if user.is_authenticated %}
+                <div class="relative" id="profile-menu-wrapper">
+                    <button onclick="toggleProfileMenu()" class="flex items-center gap-2 font-label-caps text-label-caps text-primary border border-primary px-4 py-2 hover:bg-primary hover:text-white transition-all">
+                        <span class="w-6 h-6 rounded-full bg-primary-container text-white text-[11px] flex items-center justify-center font-bold">{{ user.username|first|upper }}</span>
+                        {{ user.username|truncatechars:10 }}
+                        <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </button>
+                    <div id="profile-dropdown" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-primary/10 shadow-xl z-50">
+                        <a href="{% url 'transit:account_settings' %}" class="flex items-center gap-2 px-4 py-3 text-sm text-primary hover:bg-secondary-fixed/30 transition-colors font-semibold">
+                            <span class="material-symbols-outlined text-[18px]">manage_accounts</span> Settings
+                        </a>
+                        <a href="{% url 'transit:my_bookings' %}" class="flex items-center gap-2 px-4 py-3 text-sm text-primary hover:bg-secondary-fixed/30 transition-colors font-semibold">
+                            <span class="material-symbols-outlined text-[18px]">confirmation_number</span> My Bookings
+                        </a>
+                        <div class="border-t border-primary/10"></div>
+                        <a href="{% url 'transit:logout_user' %}" class="flex items-center gap-2 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors font-semibold">
+                            <span class="material-symbols-outlined text-[18px]">logout</span> Log Out
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'transit:login_user' %}" class="bg-primary text-on-primary font-label-caps text-label-caps px-6 py-2 rounded hover:bg-primary-container transition-colors">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    {% if messages %}
+    <div class="fixed top-20 right-4 z-50 space-y-2">
+        {% for message in messages %}
+        <div class="px-6 py-3 rounded-lg shadow-lg text-sm font-semibold
+            {% if message.tags == 'success' %}bg-green-500 text-white
+            {% elif message.tags == 'error' %}bg-red-500 text-white
+            {% else %}bg-blue-500 text-white{% endif %}
+            animate-pulse-subtle" id="msg-{{ forloop.counter }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        setTimeout(() => {
+            document.querySelectorAll('[id^="msg-"]').forEach(el => el.style.display = 'none');
+        }, 4000);
+    </script>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="w-full border-t border-outline-variant/10 bg-surface dark:bg-primary mt-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 w-full max-w-container-max mx-auto">
+            <div class="mb-8 md:mb-0">
+                <div class="font-headline-md text-headline-md font-bold text-primary dark:text-secondary-fixed mb-2">TRAJET</div>
+                <p class="text-on-surface-variant font-body-md text-sm">&copy; 2024 TRAJET. Engineered for precision.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Terms of Service</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Contact</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Network Map</a>
+            </div>
+        </div>
+    </footer>
+
+    {% if user.is_authenticated %}
+    <div id="chat-widget">
+        <div id="chat-panel">
+            <div id="chat-header">
+                <div>
+                    <div class="font-bold text-sm">TRAJET AI</div>
+                    <div class="text-[11px] opacity-70">Transit Assistant</div>
+                </div>
+                <button onclick="toggleChat()" class="text-white text-xl">&times;</button>
+            </div>
+            <div id="chat-messages">
+                <div class="chat-msg chat-ai">Hello! I'm TRAJET AI. How can I help you today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input id="chat-input" type="text" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter')sendChat()"/>
+                <button id="chat-send" onclick="sendChat()">Send</button>
+            </div>
+        </div>
+        <button id="chat-toggle" onclick="toggleChat()">
+            <span class="material-symbols-outlined" style="font-size:28px">smart_toy</span>
+        </button>
+    </div>
+    <script>
+        function toggleChat() {
+            document.getElementById('chat-panel').classList.toggle('open');
+        }
+        async function sendChat() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            const messagesDiv = document.getElementById('chat-messages');
+            messagesDiv.innerHTML += `<div class="chat-msg chat-user">${msg}</div>`;
+            input.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            try {
+                const resp = await fetch('{% url "chatbot:chat_api" %}', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+                    body: JSON.stringify({message: msg, conversation_id: 'web'})
+                });
+                const data = await resp.json();
+                messagesDiv.innerHTML += `<div class="chat-msg chat-ai">${data.response}</div>`;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            } catch(e) {
+                messagesDiv.innerHTML += `<div class="chat-msg chat-ai">Sorry, something went wrong.</div>`;
+            }
+        }
+    </script>
+    {% endif %}
+
+    <script>
+        function toggleProfileMenu() {
+            document.getElementById('profile-dropdown').classList.toggle('hidden');
+        }
+        document.addEventListener('click', function(e) {
+            const w = document.getElementById('profile-menu-wrapper');
+            if (w && !w.contains(e.target)) {
+                document.getElementById('profile-dropdown')?.classList.add('hidden');
+            }
+        });
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') document.documentElement.classList.add('dark');
+        })();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

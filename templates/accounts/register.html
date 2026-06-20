@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}TRAJET | Register{% endblock %}
+{% block content %}
+<main class="relative min-h-screen flex items-center justify-center pt-24 px-4 overflow-hidden">
+    <div class="absolute inset-0 gradient-mesh pointer-events-none"></div>
+    <div class="glass-card w-full max-w-[520px] p-8 md:p-12 rounded-lg shadow-2xl relative z-10">
+        <div class="text-center mb-10">
+            <h1 class="font-headline-lg text-headline-lg text-primary mb-2">Create Account</h1>
+            <p class="text-on-surface-variant font-body-md">Join TRAJET for seamless transit experience.</p>
+        </div>
+        <form class="space-y-5" method="POST" action="{% url 'transit:register' %}">
+            {% csrf_token %}
+            <div class="space-y-2">
+                <label class="font-label-caps text-label-caps text-on-surface-variant block">Full Name</label>
+                {{ form.full_name }}
+            </div>
+            <div class="space-y-2">
+                <label class="font-label-caps text-label-caps text-on-surface-variant block">Email Address</label>
+                {{ form.email }}
+            </div>
+            <div class="space-y-2">
+                <label class="font-label-caps text-label-caps text-on-surface-variant block">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="space-y-2">
+                <label class="font-label-caps text-label-caps text-on-surface-variant block">Password</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <div class="text-red-500 text-xs mt-1">{{ form.password1.errors.0 }}</div>
+                {% endif %}
+            </div>
+            <div class="space-y-2">
+                <label class="font-label-caps text-label-caps text-on-surface-variant block">Confirm Password</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <div class="text-red-500 text-xs mt-1">{{ form.password2.errors.0 }}</div>
+                {% endif %}
+            </div>
+            {% if form.non_field_errors %}
+            <div class="bg-red-50 border border-red-300 text-red-700 text-sm px-4 py-3 rounded">
+                {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+            </div>
+            {% endif %}
+            <button class="w-full bg-primary text-on-primary py-4 font-label-caps text-label-caps rounded font-bold hover:bg-primary-container active:scale-[0.98] transition-all duration-150 uppercase tracking-widest" type="submit">Create Account</button>
+        </form>
+        <p class="text-center mt-8 text-on-surface-variant font-body-md text-sm">
+            Already have an account? <a class="text-secondary font-bold hover:underline" href="{% url 'transit:login_user' %}">Sign in</a>
+        </p>
+    </div>
+</main>
+{% endblock %}

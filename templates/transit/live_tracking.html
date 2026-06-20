@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}TRAJET - Live Bus Tracking{% endblock %}
+{% block content %}
+<main class="pt-[100px] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-24">
+    <header class="mb-12">
+        <h1 class="font-headline-lg text-headline-lg text-primary-container mb-2">Live Tracker</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Mumbai - Pune Express Route</p>
+    </header>
+    <div class="flex flex-col lg:flex-row gap-gutter">
+        <div class="flex-grow glass-panel rounded-lg overflow-hidden h-[600px] relative border border-outline-variant/20">
+            <div class="absolute inset-0 bg-surface-container-lowest flex items-center justify-center">
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-[80px] text-primary/20">map</span>
+                    <p class="text-on-surface-variant mt-4 font-body-md">Live map integration available with Google Maps API</p>
+                </div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                    <div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center shadow-lg border-2 border-white animate-pulse">
+                        <span class="material-symbols-outlined text-white">directions_bus</span>
+                    </div>
+                    <div class="mt-2 bg-white px-3 py-1 rounded text-primary-container font-label-caps text-label-caps shadow-md border border-outline-variant/20">BUS 402 - EN ROUTE</div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full lg:w-[400px] shrink-0 flex flex-col gap-gutter">
+            <div class="glass-panel p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <span class="font-label-caps text-label-caps text-secondary tracking-widest block mb-1">CURRENT STATION</span>
+                        <h2 class="font-headline-md text-headline-md text-primary-container">Lonavala Transit Hub</h2>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+                        <span class="material-symbols-outlined">location_on</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="p-4 bg-surface-container-lowest border border-outline-variant/20 rounded">
+                        <span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">ETA TO DEST.</span>
+                        <div class="font-headline-md text-headline-md text-primary-container">1h 45m</div>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest border border-outline-variant/20 rounded">
+                        <span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">SPEED</span>
+                        <div class="font-headline-md text-headline-md text-primary-container">65 <span class="text-sm font-normal">km/h</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-label-caps text-label-caps text-on-surface-variant">PASSENGER OCCUPANCY</span>
+                        <span class="font-label-caps text-label-caps text-primary-container">42/60</span>
+                    </div>
+                    <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+                        <div class="h-full bg-secondary w-[70%] rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel p-6 rounded-lg flex-grow">
+                <h3 class="font-label-caps text-label-caps text-secondary tracking-widest mb-6">ROUTE PROGRESS</h3>
+                <div class="relative">
+                    <div class="absolute left-[11px] top-2 bottom-4 w-[2px] bg-surface-container-highest"></div>
+                    <div class="absolute left-[11px] top-2 h-[40%] w-[2px] bg-secondary z-10"></div>
+                    <div class="flex flex-col gap-6 relative z-20">
+                        <div class="flex gap-4 opacity-50">
+                            <div class="w-6 h-6 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center shrink-0 mt-1"><div class="w-2 h-2 rounded-full bg-outline"></div></div>
+                            <div class="flex-grow"><div class="flex justify-between"><span class="font-body-md text-body-md text-on-surface line-through">Mumbai Central</span><span class="font-label-caps text-label-caps text-outline">08:00 AM</span></div></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-6 h-6 rounded-full bg-secondary border-2 border-white flex items-center justify-center shrink-0 mt-1 shadow-[0_0_0_4px_rgba(0,96,171,0.2)]"><div class="w-2 h-2 rounded-full bg-white"></div></div>
+                            <div class="flex-grow"><div class="flex justify-between"><span class="font-body-md text-body-md text-primary-container font-bold">Lonavala Transit Hub</span><span class="font-label-caps text-label-caps text-secondary">ARRIVED</span></div><span class="text-sm text-on-surface-variant block mt-1">Platform 2 - 5 min halt</span></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-6 h-6 rounded-full bg-white border-2 border-surface-container-highest flex items-center justify-center shrink-0 mt-1"><div class="w-2 h-2 rounded-full bg-surface-container-highest"></div></div>
+                            <div class="flex-grow"><div class="flex justify-between"><span class="font-body-md text-body-md text-on-surface">Pune Station</span><span class="font-label-caps text-label-caps text-on-surface-variant">11:30 AM</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

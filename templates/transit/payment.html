@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}TRAJET - Payment Selection{% endblock %}
+{% block content %}
+<main class="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+    <div class="mb-12">
+        <h1 class="font-headline-lg text-headline-lg text-primary mb-4">Payment Selection</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Choose your preferred payment method to complete the transaction securely.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+        <div class="lg:col-span-8 flex flex-col gap-6">
+            <label class="glass-panel rounded-lg p-6 flex flex-col cursor-pointer transition-all hover:border-surface-tint focus-within:border-primary-container relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-4">
+                        <input checked class="custom-radio" name="payment_method" type="radio" value="card"/>
+                        <span class="material-symbols-outlined text-primary text-[28px]">credit_card</span>
+                        <span class="font-headline-md text-headline-md text-primary">Credit/Debit Card</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="w-8 h-5 bg-surface-variant rounded flex items-center justify-center text-[10px] font-bold text-on-surface-variant">VISA</span>
+                        <span class="w-8 h-5 bg-surface-variant rounded flex items-center justify-center text-[10px] font-bold text-on-surface-variant">MC</span>
+                    </div>
+                </div>
+                <div class="pl-10 pr-2 mt-2 space-y-4">
+                    <div class="flex flex-col gap-1"><label class="font-label-caps text-label-caps text-on-surface-variant">Card Number</label><input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="0000 0000 0000 0000" type="text"/></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1"><label class="font-label-caps text-label-caps text-on-surface-variant">Expiry Date</label><input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="MM/YY" type="text"/></div>
+                        <div class="flex flex-col gap-1"><label class="font-label-caps text-label-caps text-on-surface-variant">CVV</label><input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="***" type="password"/></div>
+                    </div>
+                    <div class="flex flex-col gap-1"><label class="font-label-caps text-label-caps text-on-surface-variant">Name on Card</label><input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="J. Doe" type="text"/></div>
+                </div>
+            </label>
+            <label class="glass-panel rounded-lg p-6 flex items-center justify-between cursor-pointer transition-all hover:border-surface-tint">
+                <div class="flex items-center gap-4">
+                    <input class="custom-radio" name="payment_method" type="radio" value="wallet"/>
+                    <span class="material-symbols-outlined text-primary text-[28px]">account_balance_wallet</span>
+                    <div>
+                        <div class="font-headline-md text-headline-md text-primary">TRAJET Wallet</div>
+                        <div class="font-body-md text-body-md text-on-surface-variant mt-1">Balance: ${{ wallet.balance }}</div>
+                    </div>
+                </div>
+            </label>
+            <label class="glass-panel rounded-lg p-6 flex items-center justify-between cursor-pointer transition-all hover:border-surface-tint">
+                <div class="flex items-center gap-4">
+                    <input class="custom-radio" name="payment_method" type="radio" value="upi"/>
+                    <span class="material-symbols-outlined text-primary text-[28px]">qr_code_scanner</span>
+                    <span class="font-headline-md text-headline-md text-primary">UPI</span>
+                </div>
+            </label>
+            <label class="glass-panel rounded-lg p-6 flex items-center justify-between cursor-pointer transition-all hover:border-surface-tint">
+                <div class="flex items-center gap-4">
+                    <input class="custom-radio" name="payment_method" type="radio" value="netbanking"/>
+                    <span class="material-symbols-outlined text-primary text-[28px]">account_balance</span>
+                    <span class="font-headline-md text-headline-md text-primary">Net Banking</span>
+                </div>
+            </label>
+        </div>
+        <div class="lg:col-span-4">
+            <div class="glass-panel rounded-lg p-6 sticky top-[100px]">
+                <h2 class="font-headline-md text-headline-md text-primary mb-6">Order Summary</h2>
+                <div class="space-y-4 mb-8">
+                    <div class="flex justify-between items-center pb-4 border-b border-outline-variant/20">
+                        <div>
+                            <div class="font-body-md text-body-md font-bold text-primary">{{ booking.schedule.route.departure.city }} to {{ booking.schedule.route.destination.city }}</div>
+                            <div class="font-label-caps text-label-caps text-on-surface-variant mt-1">{{ booking.schedule.departure_time|date:"M d, H:i" }}</div>
+                        </div>
+                        <div class="font-body-md text-body-md text-primary">${{ booking.total_price }}</div>
+                    </div>
+                    <div class="flex justify-between items-center"><div class="font-body-md text-body-md text-on-surface-variant">Subtotal</div><div class="font-body-md text-body-md text-primary">${{ booking.total_price }}</div></div>
+                    <div class="flex justify-between items-center"><div class="font-body-md text-body-md text-on-surface-variant">Taxes &amp; Fees</div><div class="font-body-md text-body-md text-primary">${{ tax }}</div></div>
+                </div>
+                <div class="flex justify-between items-end mb-8 pt-4 border-t border-primary/10">
+                    <div class="font-headline-md text-headline-md text-primary">Total</div>
+                    <div class="font-headline-lg text-headline-lg text-primary tracking-tight">${{ total }}</div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="payment_method" id="payment-method-hidden" value="card"/>
+                    <button type="submit" class="w-full bg-primary-container text-on-primary py-4 rounded font-label-caps text-label-caps hover:bg-primary transition-colors duration-150 flex justify-center items-center gap-2">
+                        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">lock</span> Pay Now
+                    </button>
+                </form>
+                <div class="mt-4 text-center">
+                    <span class="font-label-caps text-label-caps text-outline flex items-center justify-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">shield</span> Payments are secure and encrypted
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block extra_js %}
+<script>
+document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        document.getElementById('payment-method-hidden').value = this.value;
+    });
+});
+</script>
+{% endblock %}

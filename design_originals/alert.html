@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alerts | TRAJET</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dad9de",
+                    "on-surface-variant": "#43474f",
+                    "on-primary-container": "#7794ca",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "on-tertiary-fixed": "#001f29",
+                    "on-secondary-fixed": "#001c39",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004882",
+                    "primary-fixed-dim": "#abc7ff",
+                    "primary-container": "#042b5b",
+                    "outline": "#747780",
+                    "surface-container": "#eeedf2",
+                    "on-secondary-container": "#003c6f",
+                    "error": "#ba1a1a",
+                    "tertiary": "#001a24",
+                    "surface-variant": "#e3e2e7",
+                    "inverse-primary": "#abc7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f4f3f8",
+                    "on-tertiary-container": "#509cba",
+                    "on-background": "#1a1b1f",
+                    "surface-container-highest": "#e3e2e7",
+                    "secondary": "#0060ab",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f1f0f5",
+                    "tertiary-fixed-dim": "#86d0f0",
+                    "surface": "#faf9fd",
+                    "primary": "#001737",
+                    "error-container": "#ffdad6",
+                    "background": "#faf9fd",
+                    "on-surface": "#1a1b1f",
+                    "surface-bright": "#faf9fd",
+                    "outline-variant": "#c4c6d0",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#00303f",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#d3e3ff",
+                    "inverse-surface": "#2f3034",
+                    "surface-container-high": "#e9e7ec",
+                    "secondary-container": "#61a9ff",
+                    "on-primary-fixed-variant": "#284678",
+                    "primary-fixed": "#d7e3ff",
+                    "on-tertiary-fixed-variant": "#004d63",
+                    "on-primary-fixed": "#001b3f",
+                    "tertiary-fixed": "#bce9ff",
+                    "surface-tint": "#415e91",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "display-hero-mobile": ["Inter"],
+                    "body-md": ["Manrope"],
+                    "label-caps": ["Manrope"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Manrope"],
+                    "display-hero": ["Inter"]
+            },
+            "fontSize": {
+                    "display-hero-mobile": ["48px", {"lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "display-hero": ["90px", {"lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #faf9fd;
+            background-image: 
+                linear-gradient(#e2f0ff 1px, transparent 1px),
+                linear-gradient(90deg, #e2f0ff 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid #E2F0FF;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pill {
+            position: relative;
+        }
+        .active-pill::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 dark:bg-primary/60 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">TRAJET</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:schedules' %}">Schedules</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:my_bookings' %}">My Bookings</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:wallet' %}">Wallets</a>
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-caps text-label-caps" href="{% url 'transit:alerts' %}">Alerts</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-primary hover:text-secondary transition-colors duration-150" data-icon="notifications">notifications</button>
+<a href="{% url 'transit:account_settings' %}" class="font-label-caps text-label-caps text-primary border border-primary px-4 py-1.5 hover:bg-primary hover:text-white transition-all duration-150 block text-center">Profile</a>
+</div>
+</div>
+</nav>
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div class="max-w-2xl">
+<h1 class="font-display-hero text-display-hero-mobile md:text-display-hero text-primary mb-4">SYSTEM<br/>ALERTS</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Real-time precision monitoring. Stay updated with transit shifts, schedule adjustments, and booking verification tokens.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary hover:bg-secondary transition-all duration-150 active:scale-95 group" id="mark-read">
+<span class="material-symbols-outlined text-[18px]" data-icon="done_all">done_all</span>
+<span class="font-label-caps text-label-caps">Mark all as read</span>
+</button>
+</div>
+</div>
+<!-- Alerts Feed -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap- gutter">
+<!-- Filters Side (Desktop Only) -->
+<div class="hidden md:block md:col-span-3">
+<div class="sticky top-32 space-y-8">
+<div>
+<h3 class="font-label-caps text-label-caps text-outline mb-4">CATEGORIES</h3>
+<div class="flex flex-col gap-2">
+<button class="flex items-center justify-between p-3 glass-card text-left hover:bg-white transition-colors">
+<span class="font-label-caps text-label-caps">All Notifications</span>
+<span class="text-[10px] bg-primary text-white px-2 py-0.5 rounded-full">12</span>
+</button>
+<button class="flex items-center justify-between p-3 border border-outline-variant/10 text-left hover:bg-white transition-colors">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Transit Delays</span>
+<span class="text-[10px] bg-outline-variant text-on-surface-variant px-2 py-0.5 rounded-full">3</span>
+</button>
+<button class="flex items-center justify-between p-3 border border-outline-variant/10 text-left hover:bg-white transition-colors">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Schedule Changes</span>
+<span class="text-[10px] bg-outline-variant text-on-surface-variant px-2 py-0.5 rounded-full">5</span>
+</button>
+<button class="flex items-center justify-between p-3 border border-outline-variant/10 text-left hover:bg-white transition-colors">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Confirmations</span>
+<span class="text-[10px] bg-outline-variant text-on-surface-variant px-2 py-0.5 rounded-full">4</span>
+</button>
+</div>
+</div>
+<div class="p-6 glass-card border-dashed border-primary/20">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="info">info</span>
+<p class="text-[12px] text-on-surface-variant leading-relaxed">System status: All networks operational. Minor delays on North-South corridors due to scheduled maintenance.</p>
+</div>
+</div>
+</div>
+<!-- Feed -->
+<div class="md:col-span-9 space-y-4" id="alerts-container">
+
+    {% for alert in alerts %}
+    <div class="glass-card p-6 flex gap-6 items-start group relative overflow-hidden transition-all duration-300 hover:border-secondary">
+        
+        <div class="w-1.5 h-full absolute left-0 top-0 
+            {% if alert.alert_type == 'warning' %}bg-error
+            {% elif alert.alert_type == 'check_circle' %}bg-secondary
+            {% elif alert.alert_type == 'schedule' %}bg-tertiary-fixed-dim
+            {% else %}bg-secondary-container{% endif %}">
+        </div>
+
+        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg
+            {% if alert.alert_type == 'warning' %}bg-error-container text-error
+            {% elif alert.alert_type == 'check_circle' %}bg-secondary-fixed text-on-secondary-fixed
+            {% elif alert.alert_type == 'schedule' %}bg-tertiary-fixed text-on-tertiary-fixed
+            {% else %}bg-secondary-container text-on-secondary-container{% endif %}">
+            <span class="material-symbols-outlined" data-icon="{{ alert.alert_type }}">{{ alert.alert_type }}</span>
+        </div>
+
+        <div class="flex-grow">
+            <div class="flex justify-between items-start mb-1">
+                <h4 class="font-headline-md text-[18px] text-primary">{{ alert.title }}</h4>
+                <span class="font-label-caps text-[10px] text-outline">{{ alert.timestamp }}</span>
+            </div>
+            <p class="text-on-surface-variant body-md max-w-2xl mb-4">{{ alert.message }}</p>
+            
+            {% if alert.line_tag %}
+            <div class="flex gap-3">
+                <span class="bg-surface-container-high px-3 py-1 font-label-caps text-[10px] uppercase">{{ alert.line_tag }}</span>
+            </div>
+            {% endif %}
+        </div>
+        
+        <button class="material-symbols-outlined text-outline-variant hover:text-primary transition-colors" data-icon="close">close</button>
+    </div>
+    
+    {% empty %}
+    <div class="glass-card p-8 text-center rounded-lg">
+        <span class="material-symbols-outlined text-outline text-4xl mb-4">notifications_off</span>
+        <p class="text-on-surface-variant font-body-md">All networks are operating normally. No new alerts.</p>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface border-t border-outline-variant/10 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 w-full max-w-container-max mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-headline-md text-headline-md font-bold text-primary">TRAJET</div>
+<p class="text-on-surface-variant font-body-md text-body-md">© 2024 TRAJET. Engineered for precision.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Network Map</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for "Mark all as read"
+        document.getElementById('mark-read').addEventListener('click', function() {
+            const cards = document.querySelectorAll('#alerts-container > div');
+            cards.forEach(card => {
+                card.style.opacity = '0.6';
+                card.style.transition = 'opacity 0.5s ease';
+            });
+            this.innerHTML = `
+                <span class="material-symbols-outlined text-[18px]" data-icon="done_all">done_all</span>
+                <span class="font-label-caps text-label-caps">All read</span>
+            `;
+            this.classList.replace('bg-primary', 'bg-outline-variant');
+        });
+
+        // Individual close button logic
+        document.querySelectorAll('[data-icon="close"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.glass-card');
+                card.style.transform = 'translateX(20px)';
+                card.style.opacity = '0';
+                setTimeout(() => {
+                    card.remove();
+                }, 300);
+            });
+        });
+    </script>
+</body></html>

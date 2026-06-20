@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TRAJET — User Profile &amp; Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Manrope:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Manrope:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#dad9de",
+                      "on-surface-variant": "#43474f",
+                      "on-primary-container": "#7794ca",
+                      "secondary-fixed-dim": "#a3c9ff",
+                      "on-tertiary-fixed": "#001f29",
+                      "on-secondary-fixed": "#001c39",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004882",
+                      "primary-fixed-dim": "#abc7ff",
+                      "primary-container": "#042b5b",
+                      "outline": "#747780",
+                      "surface-container": "#eeedf2",
+                      "on-secondary-container": "#003c6f",
+                      "error": "#ba1a1a",
+                      "tertiary": "#001a24",
+                      "surface-variant": "#e3e2e7",
+                      "inverse-primary": "#abc7ff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f4f3f8",
+                      "on-tertiary-container": "#509cba",
+                      "on-background": "#1a1b1f",
+                      "surface-container-highest": "#e3e2e7",
+                      "secondary": "#0060ab",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f1f0f5",
+                      "tertiary-fixed-dim": "#86d0f0",
+                      "surface": "#faf9fd",
+                      "primary": "#001737",
+                      "error-container": "#ffdad6",
+                      "background": "#faf9fd",
+                      "on-surface": "#1a1b1f",
+                      "surface-bright": "#faf9fd",
+                      "outline-variant": "#c4c6d0",
+                      "on-error": "#ffffff",
+                      "tertiary-container": "#00303f",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#d3e3ff",
+                      "inverse-surface": "#2f3034",
+                      "surface-container-high": "#e9e7ec",
+                      "secondary-container": "#61a9ff",
+                      "on-primary-fixed-variant": "#284678",
+                      "primary-fixed": "#d7e3ff",
+                      "on-tertiary-fixed-variant": "#004d63",
+                      "on-primary-fixed": "#001b3f",
+                      "tertiary-fixed": "#bce9ff",
+                      "surface-tint": "#415e91",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "display-hero-mobile": ["Inter"],
+                      "body-md": ["Manrope"],
+                      "label-caps": ["Manrope"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Manrope"],
+                      "display-hero": ["Inter"]
+              },
+              "fontSize": {
+                      "display-hero-mobile": ["48px", {"lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "display-hero": ["90px", {"lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .technical-border {
+            border: 1px solid rgba(226, 240, 255, 1);
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #001737;
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(100%);
+        }
+        .input-focus-accent:focus {
+            border-color: #2A7CCF;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary-fixed">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 glass-nav bg-white/60 border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">TRAJET</div>
+<nav class="hidden md:flex items-center space-gap-gutter gap-8">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:schedules' %}">Schedules</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:my_bookings' %}">My Bookings</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:wallet' %}">Wallets</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors duration-150" href="{% url 'transit:alerts' %}">Alerts</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform" data-icon="notifications">notifications</span>
+<a href="{% url 'transit:account_settings' %}" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs cursor-pointer overflow-hidden border border-outline-variant/20 block text-center leading-[30px] uppercase">
+{{ request.user.username|first }}
+</a>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-margin-desktop max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="mb-16">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">Account Settings</h1>
+<p class="text-on-surface-variant font-body-lg">Manage your personal information, security protocols, and preferences.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="lg:col-span-3 space-y-2">
+<a class="flex items-center gap-3 p-4 bg-secondary-fixed text-primary font-bold border-l-2 border-secondary" href="#personal">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps text-label-caps">Personal Information</span>
+</a>
+<a class="flex items-center gap-3 p-4 text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#security">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-label-caps text-label-caps">Account Security</span>
+</a>
+<a class="flex items-center gap-3 p-4 text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#preferences">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Preferences</span>
+</a>
+<a class="flex items-center gap-3 p-4 text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#billing">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-caps text-label-caps">Billing &amp; Wallet</span>
+</a>
+</aside>
+<!-- Content Area -->
+<div class="lg:col-span-9 space-y-16">
+<!-- Personal Information Section -->
+<section class="scroll-mt-32" id="personal">
+    
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="flex items-center justify-between mb-8 pb-4 border-b border-outline-variant/10">
+            <h2 class="font-headline-md text-headline-md text-primary">Personal Information</h2>
+            <button type="submit" class="px-6 py-2 bg-primary text-white font-label-caps text-label-caps hover:bg-secondary transition-all active:scale-95">Save Changes</button>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-12">
+            
+            <!-- Profile Picture Section -->
+            <div class="w-full md:w-1/3 flex flex-col items-center space-y-4">
+                <div class="w-32 h-32 rounded-full bg-primary flex items-center justify-center text-white font-headline-lg text-[48px] uppercase border-4 border-surface-container-high shadow-sm overflow-hidden">
+                    {{ request.user.username|first }}
+                </div>
+                <div class="text-center">
+                    <label class="cursor-pointer inline-block bg-surface-container-high border border-outline-variant/20 text-on-surface-variant font-label-caps text-label-caps px-4 py-2 hover:bg-outline-variant/20 transition-colors">
+                        Change Picture
+                        <input type="file" name="profile_picture" class="hidden" accept="image/*">
+                    </label>
+                    <p class="text-xs text-outline mt-2">JPG, GIF or PNG. Max size of 800K</p>
+                </div>
+            </div>
+
+            <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant ml-1">Full Name</label>
+                    <input name="full_name" class="w-full p-4 bg-transparent technical-border border-outline-variant/20 input-focus-accent text-body-md text-primary" type="text" value="{{ profile.full_name }}"/>
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant ml-1">Email Address</label>
+                    <input name="email" class="w-full p-4 bg-transparent technical-border border-outline-variant/20 input-focus-accent text-body-md text-primary" type="email" value="{{ request.user.username }}"/>
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant ml-1">Phone Number</label>
+                    <input name="phone" class="w-full p-4 bg-transparent technical-border border-outline-variant/20 input-focus-accent text-body-md text-primary" type="tel" value="{{ profile.phone|default:'' }}"/>
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant ml-1">Timezone</label>
+                    <select name="timezone" class="w-full p-4 bg-transparent technical-border border-outline-variant/20 input-focus-accent text-body-md text-primary appearance-none">
+                        <option value="{{ profile.timezone }}" selected>{{ profile.timezone }}</option>
+                        <option value="GMT -05:00 Eastern Time">GMT -05:00 Eastern Time</option>
+                        <option value="GMT +00:00 UTC">GMT +00:00 UTC</option>
+                        <option value="GMT +01:00 Central European">GMT +01:00 Central European</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+    </form> 
+<select class="w-full p-4 bg-transparent technical-border border-outline-variant/20 input-focus-accent text-body-md text-primary appearance-none">
+<option>GMT -05:00 Eastern Time</option>
+<option>GMT +00:00 UTC</option>
+<option>GMT +01:00 Central European</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Account Security Section -->
+<section class="scroll-mt-32" id="security">
+<h2 class="font-headline-md text-headline-md text-primary mb-8 pb-4 border-b border-outline-variant/10">Account Security</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Security Card 1 -->
+<div class="p-6 technical-border bg-white hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary mb-4" data-icon="password">password</span>
+<h3 class="font-headline-md text-body-lg font-bold text-primary mb-2">Change Password</h3>
+<p class="text-on-surface-variant text-sm mb-6">Keep your account secure with a unique password.</p>
+<button class="w-full py-3 border border-primary text-primary font-label-caps text-label-caps hover:bg-primary hover:text-white transition-all">Update</button>
+</div>
+<!-- Security Card 2 -->
+<div class="p-6 technical-border bg-white hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary mb-4" data-icon="verified_user">verified_user</span>
+<h3 class="font-headline-md text-body-lg font-bold text-primary mb-2">Two-Factor Auth</h3>
+<p class="text-on-surface-variant text-sm mb-6">Add an extra layer of security to your TRAJET account.</p>
+<button class="w-full py-3 bg-secondary-fixed text-primary font-label-caps text-label-caps hover:bg-secondary-container transition-all">Enable 2FA</button>
+</div>
+<!-- Security Card 3 -->
+<div class="p-6 technical-border bg-white hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary mb-4" data-icon="devices">devices</span>
+<h3 class="font-headline-md text-body-lg font-bold text-primary mb-2">Login Sessions</h3>
+<p class="text-on-surface-variant text-sm mb-6">Manage and revoke active sessions on all devices.</p>
+<button class="w-full py-3 border border-outline text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-variant transition-all">Review</button>
+</div>
+</div>
+</section>
+<!-- Preferences Section -->
+<section class="scroll-mt-32" id="preferences">
+<h2 class="font-headline-md text-headline-md text-primary mb-8 pb-4 border-b border-outline-variant/10">Notification Preferences</h2>
+<div class="space-y-4">
+<!-- Toggle Row 1 -->
+<div class="flex items-center justify-between p-6 technical-border bg-white">
+<div>
+<h4 class="font-headline-md text-body-lg font-bold text-primary">Booking Confirmations</h4>
+<p class="text-on-surface-variant text-sm">Receive instant push notifications for every booking.</p>
+</div>
+<div class="relative inline-block w-12 h-6 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 border-outline-variant/30" id="toggle1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer transition-colors duration-200" for="toggle1">
+<span class="toggle-dot block h-6 w-6 rounded-full bg-white border-2 border-outline-variant/30 absolute transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+<!-- Toggle Row 2 -->
+<div class="flex items-center justify-between p-6 technical-border bg-white">
+<div>
+<h4 class="font-headline-md text-body-lg font-bold text-primary">Transit Alerts</h4>
+<p class="text-on-surface-variant text-sm">Real-time updates on delays and network maintenance.</p>
+</div>
+<div class="relative inline-block w-12 h-6 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 border-outline-variant/30" id="toggle2" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer transition-colors duration-200" for="toggle2">
+<span class="toggle-dot block h-6 w-6 rounded-full bg-white border-2 border-outline-variant/30 absolute transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+<!-- Toggle Row 3 -->
+<div class="flex items-center justify-between p-6 technical-border bg-white">
+<div>
+<h4 class="font-headline-md text-body-lg font-bold text-primary">Marketing Communications</h4>
+<p class="text-on-surface-variant text-sm">Newsletter and promotional offers from TRAJET partners.</p>
+</div>
+<div class="relative inline-block w-12 h-6 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 border-outline-variant/30" id="toggle3" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer transition-colors duration-200" for="toggle3">
+<span class="toggle-dot block h-6 w-6 rounded-full bg-white border-2 border-outline-variant/30 absolute transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Decorative Asset -->
+<div class="relative h-64 w-full rounded-xl overflow-hidden mt-12 bg-primary">
+
+<div class="absolute inset-0 flex items-center justify-center p-8">
+<div class="text-center">
+<h3 class="font-headline-lg text-white mb-2 tracking-tight">TRAJET Enterprise</h3>
+<p class="text-on-primary-container max-w-md mx-auto">Upgrade your account for multi-seat network access and priority terminal boarding.</p>
+<button class="mt-8 px-10 py-3 bg-secondary-fixed text-primary font-bold font-label-caps text-label-caps hover:bg-white transition-colors">Discover More</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary mb-6 md:mb-0">TRAJET</div>
+<div class="flex flex-col md:flex-row gap-8 items-center">
+<nav class="flex gap-6">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-secondary transition-colors" href="#">Network Map</a>
+</nav>
+<div class="text-on-surface-variant font-label-caps text-label-caps opacity-60">
+                    © 2024 TRAJET. Engineered for precision.
+                </div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for smooth scrolling to sections
+        document.querySelectorAll('aside a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Update active state in sidebar
+                document.querySelectorAll('aside a').forEach(a => {
+                    a.classList.remove('bg-secondary-fixed', 'text-primary', 'font-bold', 'border-l-2', 'border-secondary');
+                    a.classList.add('text-on-surface-variant');
+                });
+                this.classList.add('bg-secondary-fixed', 'text-primary', 'font-bold', 'border-l-2', 'border-secondary');
+                this.classList.remove('text-on-surface-variant');
+
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Toggle state change visual feedback
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                if (this.checked) {
+                    console.log('Preference Enabled:', this.id);
+                } else {
+                    console.log('Preference Disabled:', this.id);
+                }
+            });
+        });
+    </script>
+</body></html>

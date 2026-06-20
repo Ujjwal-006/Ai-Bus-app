@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TRAJET - Payment Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Manrope:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#747780",
+                    "on-surface": "#1a1b1f",
+                    "on-tertiary-fixed-variant": "#004d63",
+                    "inverse-primary": "#abc7ff",
+                    "on-primary-fixed-variant": "#284678",
+                    "on-tertiary": "#ffffff",
+                    "background": "#faf9fd",
+                    "surface-tint": "#415e91",
+                    "on-primary-container": "#7794ca",
+                    "inverse-surface": "#2f3034",
+                    "on-tertiary-fixed": "#001f29",
+                    "tertiary-fixed": "#bce9ff",
+                    "tertiary": "#001a24",
+                    "on-secondary-fixed": "#001c39",
+                    "outline-variant": "#c4c6d0",
+                    "on-tertiary-container": "#509cba",
+                    "on-surface-variant": "#43474f",
+                    "surface-bright": "#faf9fd",
+                    "primary-fixed": "#d7e3ff",
+                    "on-background": "#1a1b1f",
+                    "surface-container-high": "#e9e7ec",
+                    "tertiary-fixed-dim": "#86d0f0",
+                    "on-secondary-fixed-variant": "#004882",
+                    "on-secondary-container": "#003c6f",
+                    "surface-container-low": "#f4f3f8",
+                    "primary": "#001737",
+                    "secondary": "#0060ab",
+                    "secondary-fixed": "#d3e3ff",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dad9de",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#042b5b",
+                    "surface-variant": "#e3e2e7",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#eeedf2",
+                    "on-primary-fixed": "#001b3f",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f1f0f5",
+                    "surface": "#faf9fd",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#00303f",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "secondary-container": "#61a9ff",
+                    "primary-fixed-dim": "#abc7ff",
+                    "surface-container-highest": "#e3e2e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "display-hero-mobile": ["Inter"],
+                    "label-caps": ["Manrope"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Manrope"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Manrope"],
+                    "display-hero": ["Inter"]
+            },
+            "fontSize": {
+                    "display-hero-mobile": ["48px", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                    "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "600" }],
+                    "headline-lg": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                    "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                    "headline-md": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                    "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                    "display-hero": ["90px", { "lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "800" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid #E2F0FF;
+        }
+        .custom-radio {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(93, 104, 117, 0.2);
+            border-radius: 50%;
+            outline: none;
+            transition: all 0.15s ease-out;
+            position: relative;
+        }
+        .custom-radio:checked {
+            border-color: #042b5b;
+        }
+        .custom-radio:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #042b5b;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar: SUPPRESSED because this is a transactional checkout flow -->
+<!-- The user is in a focused journey; we hide the global nav to prioritize the canvas. -->
+<!-- Header for Transactional Flow -->
+<header class="w-full py-6 px-margin-mobile md:px-margin-desktop border-b border-outline-variant/20 bg-white/60 backdrop-blur-xl sticky top-0 z-40">
+<div class="max-w-container-max mx-auto flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button aria-label="Go back" class="w-10 h-10 flex items-center justify-center rounded border border-outline-variant/20 hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface group-hover:text-primary transition-colors">arrow_back</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">TRAJET</div>
+</div>
+<div class="text-on-surface-variant font-label-caps text-label-caps">Secure Checkout</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-margin-desktop">
+<div class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-4">Payment Selection</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Choose your preferred payment method to complete the transaction securely.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Payment Options -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Credit/Debit Card Option -->
+<label class="glass-panel rounded-lg p-6 flex flex-col cursor-pointer transition-all hover:border-surface-tint focus-within:border-primary-container group relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-4">
+<input checked="" class="custom-radio" name="payment_method" type="radio" value="card"/>
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 0;">credit_card</span>
+<span class="font-headline-md text-headline-md text-primary">Credit/Debit Card</span>
+</div>
+<div class="flex gap-2">
+<span class="w-8 h-5 bg-surface-variant rounded flex items-center justify-center text-[10px] font-bold text-on-surface-variant">VISA</span>
+<span class="w-8 h-5 bg-surface-variant rounded flex items-center justify-center text-[10px] font-bold text-on-surface-variant">MC</span>
+</div>
+</div>
+<!-- Expanded Card Form (visible when checked) -->
+<div class="pl-10 pr-2 mt-2 space-y-4 peer-checked:block">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Card Number</label>
+<input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 font-body-md text-body-md focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="0000 0000 0000 0000" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Expiry Date</label>
+<input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 font-body-md text-body-md focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="MM/YY" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">CVV</label>
+<input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 font-body-md text-body-md focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="***" type="password"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Name on Card</label>
+<input class="w-full bg-transparent border border-outline-variant/50 rounded p-3 font-body-md text-body-md focus:border-secondary focus:ring-0 focus:outline-none transition-colors" placeholder="J. Doe" type="text"/>
+</div>
+</div>
+</label>
+<!-- TRAJET Wallet Option -->
+<label class="glass-panel rounded-lg p-6 flex items-center justify-between cursor-pointer transition-all hover:border-surface-tint">
+<div class="flex items-center gap-4">
+<input class="custom-radio" name="payment_method" type="radio" value="wallet"/>
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 0;">account_balance_wallet</span>
+<div>
+<div class="font-headline-md text-headline-md text-primary">TRAJET Wallet</div>
+<div class="font-body-md text-body-md text-on-surface-variant mt-1">Balance: $124.50</div>
+</div>
+</div>
+</label>
+<!-- UPI Option -->
+<label class="glass-panel rounded-lg p-6 flex items-center justify-between cursor-pointer transition-all hover:border-surface-tint">
+<div class="flex items-center gap-4">
+<input class="custom-radio" name="payment_method" type="radio" value="upi"/>
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 0;">qr_code_scanner</span>
+<span class="font-headline-md text-headline-md text-primary">UPI</span>
+</div>
+</label>
+<!-- Net Banking Option -->
+<label class="glass-panel rounded-lg p-6 flex items-center justify-between cursor-pointer transition-all hover:border-surface-tint">
+<div class="flex items-center gap-4">
+<input class="custom-radio" name="payment_method" type="radio" value="netbanking"/>
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 0;">account_balance</span>
+<span class="font-headline-md text-headline-md text-primary">Net Banking</span>
+</div>
+</label>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-4">
+<div class="glass-panel rounded-lg p-6 sticky top-[100px]">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Order Summary</h2>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant/20">
+<div>
+<div class="font-body-md text-body-md font-bold text-primary">Geneva to Zurich (Express)</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-1">Oct 24, 08:30 AM</div>
+</div>
+<div class="font-body-md text-body-md text-primary">$85.00</div>
+</div>
+<div class="flex justify-between items-center">
+<div class="font-body-md text-body-md text-on-surface-variant">Subtotal</div>
+<div class="font-body-md text-body-md text-primary">$85.00</div>
+</div>
+<div class="flex justify-between items-center">
+<div class="font-body-md text-body-md text-on-surface-variant">Taxes &amp; Fees</div>
+<div class="font-body-md text-body-md text-primary">$4.25</div>
+</div>
+</div>
+<div class="flex justify-between items-end mb-8 pt-4 border-t border-primary/10">
+<div class="font-headline-md text-headline-md text-primary">Total</div>
+<div class="font-headline-lg text-headline-lg text-primary tracking-tight">$89.25</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary py-4 rounded font-label-caps text-label-caps hover:bg-primary transition-colors duration-150 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+                        Pay Now
+                    </button>
+<div class="mt-4 text-center">
+<span class="font-label-caps text-label-caps text-outline flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+                            Payments are secure and encrypted
+                        </span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer: SUPPRESSED because this is a transactional checkout flow -->
+</body></html>
